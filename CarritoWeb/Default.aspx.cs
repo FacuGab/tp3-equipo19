@@ -17,14 +17,39 @@ namespace CarritoWeb.Vistas
         //TODO: LOAD
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            try
+            {
+                if(!IsPostBack)
+                {
+                    negocio = new NegocioArticulo();
+                    listaArticulos = negocio.Leer();
+                    // hay que meter la lista en session para evitar perder la info y poder manejar la lista (hacer mas adelante)
+                }
+                dgvListaPrincipal.DataSource = listaArticulos;
+                dgvListaPrincipal.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx");
+            }
+        }
+
+        // SOLO DE EJEMPLO PARA PROBAR EL SP (sacar mas adelante)
+        protected void btnListarSP_Click(object sender, EventArgs e)
+        {
+            try
             {
                 negocio = new NegocioArticulo();
-                listaArticulos = negocio.Leer();
-
+                listaArticulos = negocio.ListarSP();
+                dgvEjemploSP.DataSource = listaArticulos;
+                dgvEjemploSP.DataBind();
             }
-            dgvListaPrincipal.DataSource = listaArticulos;
-            dgvListaPrincipal.DataBind();
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx");
+            }
         }
     }//fin
 }

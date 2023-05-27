@@ -76,6 +76,60 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+        //TODO: LISTAR CON SP
+        public List<Articulo> ListarSP()
+        {
+            try
+            {
+                Articulo artAux;
+                articulos = new List<Articulo>();
+                datos = new Database();
+
+                // CADENA DE CONEXION A LA BD EN Database.cs
+                datos.AbrirConexion();
+                datos.setSP("spListar");
+                datos.readData();
+                lector = datos.reader;
+
+                while (lector.Read())
+                {
+                    artAux = new Articulo();
+                    artAux.id = Convert.ToInt32(lector["Id"]);
+                    artAux.codigo = lector["Codigo"].ToString();
+                    artAux.nombre = lector["Nombre"].ToString();
+                    artAux.descripicion = lector["Descripcion"].ToString();
+
+                    artAux.marca = new Marca(lector["Marca"].ToString());
+                    artAux.marca.idMarca = (int)lector["IdMarca"];
+                    artAux.marca.marca = lector["Marca"].ToString();
+
+                    artAux.categoria = new Categoria(lector["Categoria"].ToString());
+                    artAux.categoria.idCategoria = (int)lector["IdCategoria"];
+                    artAux.categoria.categoria = lector["Categoria"].ToString();
+
+                    artAux.precio = Convert.ToDecimal(lector["Precio"]);
+                    if (!(lector["URL"] is DBNull))
+                        artAux.UrlImagen = lector["URL"].ToString(); // cuidado, si tiene mas fotos no se como cargarlas, hay que usar una query y modo distinto
+                    // metodo lector de imagenes ?
+                    articulos.Add(artAux);
+                }
+                return articulos;
+
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                lector?.Close();
+                datos.CerrarConexion();
+            }
+        }
         //TODO: CBO BOX CATEGORIAS
         public List<Categoria> LeerCategorias()
         {

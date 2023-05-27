@@ -15,10 +15,9 @@ namespace AccesoDatos
         private SqlConnection connection;
         private SqlCommand command;
             //cadena manu = "server=Manulo-PC\\SQLLABO; database = CATALOGO_P3_DB; integrated security = true"
-            //cadena facu = "server=.; database = CATALOGO_P3_DB; integrated security = true"
         //METODOS:
         // TODO: ABRIR CONEXION (cadena de conexion aca)
-        public bool AbrirConexion(string path = "server=Manulo-PC\\SQLLABO; database = CATALOGO_P3_DB; integrated security = true")
+        public bool AbrirConexion(string path = "server=.; database = CATALOGO_P3_DB; integrated security = true")
         {
             try
             {
@@ -60,6 +59,22 @@ namespace AccesoDatos
             try
             {
                 command = new SqlCommand(query, connection);
+            }
+            catch (Exception ex)
+            {
+                command.Dispose();
+                throw ex;
+            }
+        }
+        //TODO: SETEAR SP
+        public void setSP(string query)
+        {
+            try
+            {
+                command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandText = query;
             }
             catch (Exception ex)
             {

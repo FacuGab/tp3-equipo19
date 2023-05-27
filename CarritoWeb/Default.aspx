@@ -9,8 +9,15 @@
         <div class="col-3"></div>
         <div class="col-6">
             <!-- LISTA -->
-            <asp:GridView ID="dgvListaPrincipal" CssClass="table table-bordered table-dark" runat="server">
-            </asp:GridView>
+            <div class="mb-3">
+                <asp:GridView ID="dgvListaPrincipal" CssClass="table table-bordered table-dark" runat="server">
+                </asp:GridView>
+            </div>
+            <div class="mb-3">
+                <asp:Button Text="Listar Con SP" ID="btnListarSP" OnClick="btnListarSP_Click" runat="server" />
+                <asp:GridView ID="dgvEjemploSP" CssClass="table table-bordered table-danger" runat="server">
+                </asp:GridView>
+            </div>
         </div>
         <div class="col-3"></div>
     </div>
