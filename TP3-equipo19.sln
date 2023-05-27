@@ -5,11 +5,11 @@ VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarritoWeb", "CarritoWeb\CarritoWeb.csproj", "{5F219819-324B-488F-B556-7C0402F7EB10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "..\..\..\tpWinforms\ProyectoWinforms2023\app\Dominio\Dominio.csproj", "{4BD7A35C-9D1D-4489-90D9-1F786F238988}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{4BD7A35C-9D1D-4489-90D9-1F786F238988}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negocio", "..\..\..\tpWinforms\ProyectoWinforms2023\app\Negocio\Negocio.csproj", "{7E1B6778-0884-420E-B4D0-44CB3950BF56}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negocio", "Negocio\Negocio.csproj", "{7E1B6778-0884-420E-B4D0-44CB3950BF56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccesoDatos", "..\..\..\tpWinforms\ProyectoWinforms2023\app\AccesoDatos\AccesoDatos.csproj", "{FAEC1694-1340-4E98-AF4A-82FC38CB8CF4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccesoDatos", "AccesoDatos\AccesoDatos.csproj", "{FAEC1694-1340-4E98-AF4A-82FC38CB8CF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

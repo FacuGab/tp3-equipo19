@@ -1,0 +1,52 @@
+﻿body {
+    
+}
+
+#navBarIcon{
+    height : 45px;
+    width : 57px;
+}
+#navBarIconCarrito {
+    height: 45px;
+    width: 57px;
+    margin-top: -7px;
+    margin-left: -10px;
+}
+nav div ul li {
+    margin-right: 10px
+}
+#banner {
+    width: 100%;
+    height: auto;
+}
+
+
+
+
+/*FOOTER*/
+footer {
+    background: black;
+}
+
+    footer a {
+        text-decoration: none;
+        color: #6c757d;
+    }
+
+.row a:hover {
+    background: whitesmoke;
+    color: black;
+    box-shadow: 2px 2px 20px #c7c3c4;
+    border-radius: 6px;
+    transition: 0.4s;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.row h6 {
+    color: rgba(255, 255, 255, 0.664);
+}
+
+#pie {
+    color: rgba(245, 245, 245, 0.445);
+}
