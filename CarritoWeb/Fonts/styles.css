@@ -1,7 +1,7 @@
 ﻿#form1 {
     background-color: gray;
 }
-
+/*Barra de navegación*/
 #navBarIcon{
     height : 10%;
     width : 10%;
@@ -17,6 +17,15 @@ nav div ul li {
     font-size:20px;
 
 }
+nav div ul li:hover {
+    background: whitesmoke;
+    color: black;
+    box-shadow: 2px 2px 20px #c7c3c4;
+    border-radius: 6px;
+    transition: 0.4s;
+    padding: 5px;
+    font-size: 18px;
+}
 
 #banner {
     width: 100%;
@@ -27,14 +36,11 @@ nav div ul li {
 
 
 /*FOOTER*/
-footer {
-    background: black;
-}
 
-    footer a {
-        text-decoration: none;
-        color: #6c757d;
-    }
+footer a {
+    text-decoration: none;
+    color: #6c757d;
+}
 
 .row a:hover {
     background: whitesmoke;

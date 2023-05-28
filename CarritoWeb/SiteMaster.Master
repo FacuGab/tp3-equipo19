@@ -41,7 +41,7 @@
                                     <a class="nav-link text-black" href="Carrito.aspx">Carrito</a>
                                 </li>
                                 <li class="nav-item ml-5">
-                                    <a class="nav-link" runat="server" href="~/">
+                                    <a class="nav-link" runat="server" href="~/" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                                         <img src="Recursos/Carrito.png" class="img-fluid" alt="icono-carrito" id="navBarIconCarrito" /></a>
                                 </li>
                             </ul>
@@ -53,6 +53,22 @@
             <div class="container">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
+
+                <!--Canvas carrito de compras -->
+                <div class="offcanvas offcanvas-end bg-black text-light" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                    <div class="offcanvas-header">
+                        <h5 id="offcanvasRightLabel">Carrito de compras</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        play 4
+                        <button class="btn btn-success">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -66,7 +82,7 @@
                                 Repositorio
                             </h6>
                             <p class="text-center ">
-                                <a href="https://github.com/FacuGab/tp3-equipo19/tree/main/CarritoWeb" class="me-4 link-grayish text-decoration-none text-light">
+                                <a href="https://github.com/FacuGab/tp3-equipo19/tree/main/CarritoWeb" class="me-4 link-grayish text-decoration-none ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
                                         <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
                                     </svg>
@@ -81,7 +97,6 @@
                                 <a href="https://www.frgp.utn.edu.ar/" class="me-4 link-grayish text-decoration-none">🎓 UTN FRGP 🎓
                                 </a>
                             </p>
-
                         </div>
                         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                             <h6 class="text-uppercase fw-bold mb-4 text-center" id="contacto-foot">Materia</h6>
