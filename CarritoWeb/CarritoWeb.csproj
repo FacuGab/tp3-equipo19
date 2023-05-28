@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Carrito.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Fonts\bootstrap-grid.css" />
     <Content Include="Fonts\bootstrap-grid.min.css" />
@@ -100,6 +101,7 @@
     <Content Include="Recursos\Eliminar.png" />
     <Content Include="Recursos\fondo.png" />
     <Content Include="Recursos\iconoPP.ico" />
+    <Content Include="Recursos\image-not-found.png" />
     <Content Include="Recursos\maximizar.png" />
     <Content Include="Recursos\minimizar.png" />
     <Content Include="Recursos\minimizar1.png" />
@@ -115,6 +117,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Carrito.aspx.cs">
+      <DependentUpon>Carrito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Carrito.aspx.designer.cs">
+      <DependentUpon>Carrito.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -173,7 +182,6 @@
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="SiteMaster.Master" />
-    <Content Include="Recursos\image-not-found.webp" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

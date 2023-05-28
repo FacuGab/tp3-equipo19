@@ -17,8 +17,25 @@ namespace CarritoWeb
         //TODO: LOAD
         protected void Page_Load(object sender, EventArgs e)
         {
-            negocio = new NegocioArticulo();
-            listaArticulos = negocio.Leer();
-        } 
+            try
+            {
+                if (!IsPostBack && Session["listaPrincipal"] == null)
+                {
+                    negocio = new NegocioArticulo();
+                    Session.Add("listaPrincipal", negocio.Leer());
+                }
+                listaArticulos = (List<Articulo>)Session["listaPrincipal"];
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx");
+            }
+        }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            // nada por ahora ...
+        }
     }
 }

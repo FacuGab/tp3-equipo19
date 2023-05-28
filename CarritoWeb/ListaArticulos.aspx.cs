@@ -19,12 +19,12 @@ namespace CarritoComprasLopta
             Title = "Grilla articulos";
             try
             {
-                if (!IsPostBack)
+                if (!IsPostBack && Session["listaPrincipal"] == null)
                 {
                     negocio = new NegocioArticulo();
-                    listaArticulos = negocio.Leer();
-                    // hay que meter la lista en session para evitar perder la info y poder manejar la lista (hacer mas adelante)
+                    Session.Add("listaPrincipal", negocio.Leer());
                 }
+                listaArticulos = (List<Articulo>)Session["listaPrincipal"];
                 dgvArticulos.DataSource = listaArticulos;
                 dgvArticulos.DataBind();
             }
@@ -34,22 +34,6 @@ namespace CarritoComprasLopta
                 Response.Redirect("Error.aspx");
             }
 
-        }
-        // SOLO DE EJEMPLO PARA PROBAR EL SP (sacar mas adelante)
-        protected void btnListarSP_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                negocio = new NegocioArticulo();
-                listaArticulos = negocio.ListarSP();
-                dgvArticulos.DataSource = listaArticulos;
-                dgvArticulos.DataBind();
-            }
-            catch (Exception ex)
-            {
-                Session.Add("error", ex);
-                Response.Redirect("Error.aspx");
-            }
         }
     }
 }
