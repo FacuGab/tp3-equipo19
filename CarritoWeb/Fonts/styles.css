@@ -1,10 +1,10 @@
-﻿body {
-    
+﻿#form1 {
+    background-color: gray;
 }
 
 #navBarIcon{
-    height : 45px;
-    width : 57px;
+    height : 10%;
+    width : 10%;
 }
 #navBarIconCarrito {
     height: 45px;
@@ -13,8 +13,11 @@
     margin-left: -10px;
 }
 nav div ul li {
-    margin-right: 10px
+    margin-right: 10px;
+    font-size:20px;
+
 }
+
 #banner {
     width: 100%;
     height: auto;
