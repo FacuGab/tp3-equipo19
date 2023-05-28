@@ -27,7 +27,7 @@
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <a class="navbar-brand img-fluid text-light" href="Default.aspx">
+                        <a class="navbar-brand img-fluid text-light" href="#">
                             <img src="Recursos/hellfish.png" class="img-fluid" alt="logo-lopta" id="navBarIcon" /></a>
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav ms-auto d-flex">

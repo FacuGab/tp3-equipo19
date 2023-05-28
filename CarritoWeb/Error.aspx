@@ -7,6 +7,7 @@
             <h3>Error:</h3>
             <h4>
                 <asp:Label Text="" ID="lblMsj" runat="server" />
+                <asp:Label Text="" ID="lblPath" runat="server" />
             </h4>
         </div>
     </div>
