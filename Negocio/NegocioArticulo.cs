@@ -50,7 +50,8 @@ namespace Negocio
                     artAux.marca.marca = lector["Marca"].ToString();
 
                     artAux.categoria = new Categoria(lector["Categoria"].ToString());
-                    artAux.categoria.idCategoria = (int)lector["IdCategoria"];
+                    if (!(lector["IdCategoria"] is DBNull))
+                        artAux.categoria.idCategoria = (int)lector["IdCategoria"];
                     artAux.categoria.categoria = lector["Categoria"].ToString();
 
                     artAux.precio = Convert.ToDecimal(lector["Precio"]);
