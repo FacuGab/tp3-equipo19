@@ -12,7 +12,6 @@ namespace CarritoComprasLopta
     public partial class About : Page
     {
         private NegocioArticulo negocio;
-        private Articulo articulo;
         private List<Articulo> listaArticulos;
         protected void Page_Load(object sender, EventArgs e)
         {

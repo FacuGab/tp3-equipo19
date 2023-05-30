@@ -51,12 +51,12 @@ namespace CarritoWeb
         protected global::System.Web.UI.WebControls.Button btnFiltro;
 
         /// <summary>
-        /// btnAgregar control.
+        /// repListaPrincipal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregar;
+        protected global::System.Web.UI.WebControls.Repeater repListaPrincipal;
     }
 }

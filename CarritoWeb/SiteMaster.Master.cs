@@ -11,6 +11,16 @@ namespace CarritoWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                dgvCarrito.DataSource = Session["selected"];
+                dgvCarrito.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
 
         }
     }
