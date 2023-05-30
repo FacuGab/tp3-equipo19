@@ -1,5 +1,9 @@
 ﻿#form1 {
-    background-color: gray;
+    background-image: url(../Recursos/the-simpsons-beatles.jpg);
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 /*Barra de navegación*/
 #navBarIcon{
@@ -32,11 +36,20 @@ nav div ul li:hover {
     height: auto;
 }
 
-
-
+/*Cards*/
+.imgCard {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+    .imgCard:hover {
+        width: 125%;
+        height: 125%;
+        transition: 0.7s;
+        padding: 15px;
+    }
 
 /*FOOTER*/
-
 footer a {
     text-decoration: none;
     color: #6c757d;
