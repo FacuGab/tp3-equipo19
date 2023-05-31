@@ -8,7 +8,7 @@
 
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
-            <div class="row">   
+            <div class="row">
                 <h1 id="nuestrosProd" class="text-center text-light mt-5 mb-5 p-2">Nuestros productos</h1>
                 <h2 class="text-center text-light mt-5 mb-5 p-2">Cantidad de Articulos: <span class="badge text-bg-primary"><%: countArticulos %></span></h2>
             </div>
@@ -16,7 +16,7 @@
     </asp:UpdatePanel>
 
     <!--FILTROS LISTA PRINCIPAL -->
-    <div class="row">
+    <section class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-2">
             <div class="form-floating">
@@ -40,7 +40,7 @@
             <asp:Button ID="btnFiltro" runat="server" Text="Aplicar" CssClass="btn btn-primary" />
         </div>
         <div class="col-lg-2"></div>
-    </div>
+    </section>
 
     <!-- LISTA PRINCIPAL -->
     <asp:UpdatePanel runat="server">
@@ -57,9 +57,8 @@
                             <div class="card-body">
                                 <h5 class="card-title card-header text-center"><%#DataBinder.Eval( Container.DataItem, "marca")%></h5>
                                 <p class="card-text"><%#DataBinder.Eval( Container.DataItem, "descripicion")%></p>
-
                             </div>
-                            <asp:Button Text="🛒 Agregar al carrito" ID="btnAgregar" CssClass="btn btn-outline-secondary mb-4 "  CommandArgument='<%#Eval("id")%>' CommandName="Id_articulo" OnClick="btnAgregar_Click" runat="server" />
+                            <asp:Button Text="🛒 Agregar al carrito" ID="btnAgregar" CssClass="btn btn-outline-secondary mb-4 " CommandArgument='<%#Eval("id")%>' CommandName="Id_articulo" OnClick="btnAgregar_Click" runat="server" />
                         </div>
                     </ItemTemplate>
                 </asp:Repeater>
@@ -67,11 +66,12 @@
             </section>
         </ContentTemplate>
     </asp:UpdatePanel>
-
+    <section class="row">
+    </section>
     <!-- Fin Default.aspx -->
 </asp:Content>
 
-                <%--        <%
+<%--        <%
                     foreach (Dominio.Articulo articulo in listaArticulos) //cambiar a repeater despues x si se rompe en las exepciones
                     {
                 %>
