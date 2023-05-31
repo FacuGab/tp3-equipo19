@@ -33,7 +33,7 @@ namespace Negocio
 
                 // CADENA DE CONEXION A LA BD EN Database.cs
                 datos.AbrirConexion();
-                datos.setQuery("SELECT DISTINCT( A.Id), Codigo, Nombre, A.Descripcion as Descripcion, M.Descripcion as Marca, M.Id as IdMarca, C.Descripcion as Categoria, C.Id as IdCategoria, Precio, I.ImagenUrl  as URL FROM ARTICULOS A  LEFT JOIN CATEGORIAS C on C.Id = A.IdCategoria LEFT JOIN MARCAS M on M.Id = A.IdMarca LEFT JOIN IMAGENES I on I.IdArticulo = A.Id");    
+                datos.setQuery("SELECT DISTINCT( A.Id), Codigo, Nombre, A.Descripcion as Descripcion, M.Descripcion as Marca, M.Id as IdMarca, C.Descripcion as Categoria, C.Id as IdCategoria, Precio, (SELECT TOP 1 ImagenUrl FROM IMAGENES WHERE IdArticulo = A.Id) as URL FROM ARTICULOS A  LEFT JOIN CATEGORIAS C on C.Id = A.IdCategoria LEFT JOIN MARCAS M on M.Id = A.IdMarca LEFT JOIN IMAGENES I on I.IdArticulo = A.Id");    
                 datos.readData();
                 lector = datos.reader;
 

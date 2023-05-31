@@ -72,7 +72,11 @@
                             <asp:Label Text="0$" ID="lblTotalCarrito" runat="server" />
                         </p>
                         <p>
-                            <asp:GridView runat="server" ID="dgvCarrito">
+                            <%foreach (var item in )
+                                {
+
+                                } %>
+                            <%--<asp:GridView runat="server" ID="dgvCarrito">--%>
                             <%--<label>Articulo XXX</label>
                             <label>Cantidad: XXX</label>
                             <label>Precio: XXX</label>
