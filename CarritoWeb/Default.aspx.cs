@@ -21,6 +21,7 @@ namespace CarritoWeb
         public Dictionary<int, int> cantidadXitem;
         private CarritoItem carritoItem;
         public int countArticulos { get; set; } = 0;
+        public int countItemCarrito { get; set; } = 0;
         public List<Articulo> listaArticulos { get; set; }
         public List<Articulo> lsCarrito { get; set; }
 
@@ -39,13 +40,17 @@ namespace CarritoWeb
                     if (Session["listaPrincipal"] == null)
                         Session.Add("listaPrincipal", negocio.Leer());
 
-                    //Iniciamos el contador de articulos agregadoss
+                    //Iniciamos a 0 el contador de articulos agregadoss
                     if (Session["countSelected"] != null)
                         Session["countSelected"] = 0;
 
                     //Iniciamos la lista del Carrito
                     if (Session["carritoItem"] == null)
                         Session.Add("carritoItem", new List<CarritoItem>());
+
+                    //Iniciamos la cantidad total de articulos en carrito
+                    if (Session["countCarrito"] == null)
+                        Session.Add("countCarrito", 0);
 
                     //Apuntamos a la lista principal de articulos en bd y cargamos datos en rep
                     listaArticulos = (List<Articulo>)Session["listaPrincipal"];
@@ -54,7 +59,6 @@ namespace CarritoWeb
 
                 //SI ES Postback, apuntamos a lista principal de art en bd
                 listaArticulos = (List<Articulo>)Session["listaPrincipal"];
-
             }
             catch (Exception ex)
             {
@@ -123,7 +127,33 @@ namespace CarritoWeb
         //TOOD: BOTON ELIMINAR LISTA ITEMS CARRITO
         protected void btnEliminarLsCarrito_Click(object sender, EventArgs e)
         {
-            // En desarrollo.....
+            try
+            {
+                if (Session["carritoItem"] != null)
+                {
+                    Session.Remove("carritoItem");
+                    Session.Add("carritoItem", new List<CarritoItem>());
+                }
+                if (Session["countCarrito"] != null)
+                {
+                    Session.Remove("countCarrito");
+                    Session.Add("countCarrito", 0);
+                }
+                Response.Redirect("Default.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx");
+            }
+        }
+        //TODO: BOTON CARGAR CARRITO
+        protected void btnCargarCarrito_Click1(object sender, EventArgs e)
+        {
+            //Apuntamos a la lista de art selecionados por el usuario y cargamos datos en grid(temporal)
+            lsCarrito = (List<Articulo>)Session["selected"];
+            mostrarListaCarritoItem(cargarListaCarritoItem(lsCarrito));
+            lsCarrito.Clear();
         }
 
         //METODOS:
@@ -150,7 +180,7 @@ namespace CarritoWeb
         {
             itemList = (List<CarritoItem>)Session["carritoItem"];
 
-            if (itemList != null && lsSelected != null)
+            if ( (itemList != null && lsSelected != null) || lsSelected.Count > 0)
             {
                 //Creamos Dic cantidad x Item, <key, value>, donde el key es el id de art y el value la cantidad del art
                 cantidadXitem = new Dictionary<int, int>();
@@ -163,6 +193,13 @@ namespace CarritoWeb
                     else
                         cantidadXitem.Add(art.id, 1);
                 }
+
+                //Calculamos la cantidad total de articulos en carrito
+                foreach (var item in cantidadXitem)
+                {
+                    countItemCarrito += item.Value;
+                }
+                Session["countCarrito"] = countItemCarrito;
 
                 //Si lista de items carrito no tiene nada:
                 if (itemList.Count == 0)
@@ -195,14 +232,9 @@ namespace CarritoWeb
             {
                 dgvCarrito.DataSource = ls;
                 dgvCarrito.DataBind();
+                lblCantArtCarrito.Text = countItemCarrito.ToString();
             }
         }
 
-        protected void btnCargarCarrito_Click(object sender, EventArgs e)
-        {
-            //Apuntamos a la lista de art selecionados por el usuario y cargamos datos en grid(temporal)
-            lsCarrito = (List<Articulo>)Session["selected"];
-            mostrarListaCarritoItem(cargarListaCarritoItem(lsCarrito));
-        }
     }//fin
 }

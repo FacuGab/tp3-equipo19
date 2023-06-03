@@ -7,7 +7,7 @@
     <asp:ScriptManager runat="server" />
 
     <div class="row">
-        <asp:Button Text="Cargar Carrito" CssClass="btn-primary" OnClick="btnCargarCarrito_Click" runat="server" />
+        <asp:Button Text="Cargar Carrito" CssClass="btn-primary" ID="btnCargarCarrito" OnClick="btnCargarCarrito_Click1" runat="server" />
     </div>
 
     <asp:UpdatePanel runat="server">
@@ -76,6 +76,7 @@
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
             <section class="row">
+
                 <!--Canvas carrito de compras -->
                 <div class="offcanvas offcanvas-end bg-black text-light w-25" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                     <div class="offcanvas-header">
@@ -113,6 +114,7 @@
                     </div>
                 </div>
                 <!-- Fin Canvas -->
+
             </section>
         </ContentTemplate>
     </asp:UpdatePanel>
