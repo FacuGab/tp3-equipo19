@@ -6,6 +6,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" />
 
+    <div class="row">
+        <asp:Button Text="Cargar Carrito" CssClass="btn-primary" OnClick="btnCargarCarrito_Click" runat="server" />
+    </div>
+
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
             <div class="row">
@@ -57,6 +61,7 @@
                             <div class="card-body">
                                 <h5 class="card-title card-header text-center"><%#DataBinder.Eval( Container.DataItem, "marca")%></h5>
                                 <p class="card-text"><%#DataBinder.Eval( Container.DataItem, "descripicion")%></p>
+                                <p class="card-text"><%#DataBinder.Eval( Container.DataItem, "id")%></p>
                             </div>
                             <asp:Button Text="🛒 Agregar al carrito" ID="btnAgregar" CssClass="btn btn-outline-secondary mb-4 " CommandArgument='<%#Eval("id")%>' CommandName="Id_articulo" OnClick="btnAgregar_Click" runat="server" />
                         </div>
@@ -66,26 +71,50 @@
             </section>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <section class="row">
-    </section>
+
+    <!-- CARRITO -->
+    <asp:UpdatePanel runat="server">
+        <ContentTemplate>
+            <section class="row">
+                <!--Canvas carrito de compras -->
+                <div class="offcanvas offcanvas-end bg-black text-light w-25" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                    <div class="offcanvas-header">
+                        <h5 id="offcanvasRightLabel">Carrito de compras</h5>
+                        <asp:Button Text="Eliminar Lista" ID="btnEliminarLsCarrito" CssClass="btn" OnClick="btnEliminarLsCarrito_Click" runat="server" />
+                        <button type="button" class="btn-link text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <!-- ACA IRIA LA LISTA DE ARTICULOS EN EL CARRITO (ESTO TENDRIA QUE IR EN UNA REP, FOREACH O DGV PARA CARGAR DE UNA LISTA FILTRADA) -->
+                        <p>
+                            <label>Cantidad de Articulos</label>
+                            <asp:Label Text="0" ID="lblCantArtCarrito" runat="server" />
+                        </p>
+                        <p>
+                            <label>Total:</label>
+                            <asp:Label Text="0$" ID="lblTotalCarrito" runat="server" />
+                        </p>
+                        <p>
+                            <asp:GridView runat="server" ID="dgvCarrito">
+                                <%--<label>Articulo XXX</label>
+                            <label>Cantidad: XXX</label>
+                            <label>Precio: XXX</label>
+                            <button class="btn btn-success">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                </svg>
+                            </button>
+                            <button class="btn btn-danger">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                </svg>
+                            </button>--%>
+                            </asp:GridView>
+                        </p>
+                    </div>
+                </div>
+                <!-- Fin Canvas -->
+            </section>
+        </ContentTemplate>
+    </asp:UpdatePanel>
     <!-- Fin Default.aspx -->
 </asp:Content>
-
-<%--        <%
-                    foreach (Dominio.Articulo articulo in listaArticulos) //cambiar a repeater despues x si se rompe en las exepciones
-                    {
-                %>
-                        <div class="card m-3 pt-2 bg-warning text-dark" style="width: 18rem;">
-                            <span style="display:none"><%:articulo.id %></span>
-                            <div class="card-header text-center">
-                                <%:articulo.nombre %>
-                            </div>
-                                <img src="<%:articulo.UrlImagen %>" class="card-img-top img-fluid imgCard" onerror="this.src='./Recursos/image-not-found.png'" alt="Imagen del articulo" />
-                            <div class="card-body">
-                                <h5 class="card-title card-header text-center"><%:articulo.marca %></h5>
-                                <p class="card-text"><%:articulo.descripicion %></p>
- 
-                            </div>
-                                <asp:Button Text="🛒 Agregar al carrito" ID="btnAgregar" CssClass="btn btn-outline-secondary mb-4 " OnClick="btnAgregar_Click" CommandArgument='<%:articulo.id %>' CommandName="Id_articulo" runat="server"/>
-                        </div>
-                <%  }   %>--%>

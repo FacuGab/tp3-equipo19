@@ -224,7 +224,7 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
-        //TODO: Modificar artículo (HAY QUE REVISAR LA QUERY PRINCIPAL QUE NO TRAE LOS NUEVOS ARTÍCULOS)
+        //TODO: Modificar artículo
         public int Modificar(Articulo nuevoArticulo)
         {
             try

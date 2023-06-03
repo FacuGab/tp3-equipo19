@@ -15,6 +15,7 @@ namespace Dominio
             marca = new Marca();
             categoria = new Categoria();
         }
+
         [DisplayName("Id")]
         public int id { get; set; }
         [DisplayName("Código")]//TODO: Cambiar nombre del encabezado de la columna

@@ -3,9 +3,12 @@ using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
 
 namespace CarritoWeb
 {
@@ -13,26 +16,43 @@ namespace CarritoWeb
     {
         private NegocioArticulo negocio;
         private Articulo articulo;
+        private List<CarritoItem> itemList;
+        private List<CarritoItem> itmAux;
+        public Dictionary<int, int> cantidadXitem;
+        private CarritoItem carritoItem;
         public int countArticulos { get; set; } = 0;
         public List<Articulo> listaArticulos { get; set; }
+        public List<Articulo> lsCarrito { get; set; }
+
         //TODO: LOAD
         protected void Page_Load(object sender, EventArgs e)
         {
-            //negocio = new NegocioArticulo();
-            //listaArticulos = negocio.Leer();
             try
             {
+                //SI NO ES Postback
                 if (!IsPostBack)
                 {
                     negocio = new NegocioArticulo();
                     cargarFiltros();
 
+                    //Traemos a obj de session una lista con todos los articulos en bd
                     if (Session["listaPrincipal"] == null)
                         Session.Add("listaPrincipal", negocio.Leer());
 
+                    //Iniciamos el contador de articulos agregadoss
+                    if (Session["countSelected"] != null)
+                        Session["countSelected"] = 0;
+
+                    //Iniciamos la lista del Carrito
+                    if (Session["carritoItem"] == null)
+                        Session.Add("carritoItem", new List<CarritoItem>());
+
+                    //Apuntamos a la lista principal de articulos en bd y cargamos datos en rep
                     listaArticulos = (List<Articulo>)Session["listaPrincipal"];
                     cargarListaPrincipal(listaArticulos);
                 }
+
+                //SI ES Postback, apuntamos a lista principal de art en bd
                 listaArticulos = (List<Articulo>)Session["listaPrincipal"];
 
             }
@@ -42,6 +62,7 @@ namespace CarritoWeb
                 Response.Redirect("Error.aspx");
             }
         }
+        //EVENTOS:
         //TODO: FILTRO RAPIDO EVENTO
         protected void tbFiltroRapido_TextChanged(object sender, EventArgs e)
         {
@@ -90,7 +111,7 @@ namespace CarritoWeb
                     lsTemporal = (List<Articulo>)Session["selected"];
                     lsTemporal.AddRange(lsPrincipal.FindAll(itm => itm.id == id));
                 }
-                
+
                 cargarListaPrincipal(listaArticulos);
             }
             catch (Exception ex)
@@ -98,6 +119,11 @@ namespace CarritoWeb
                 Session.Add("error", ex);
                 Response.Redirect("Error.aspx");
             }
+        }
+        //TOOD: BOTON ELIMINAR LISTA ITEMS CARRITO
+        protected void btnEliminarLsCarrito_Click(object sender, EventArgs e)
+        {
+            // En desarrollo.....
         }
 
         //METODOS:
@@ -119,6 +145,64 @@ namespace CarritoWeb
             repListaPrincipal.DataSource = list;
             repListaPrincipal.DataBind();
         }
+        //TODO: Cargar Lista de Carrito
+        private List<CarritoItem> cargarListaCarritoItem(List<Articulo> lsSelected)
+        {
+            itemList = (List<CarritoItem>)Session["carritoItem"];
 
+            if (itemList != null && lsSelected != null)
+            {
+                //Creamos Dic cantidad x Item, <key, value>, donde el key es el id de art y el value la cantidad del art
+                cantidadXitem = new Dictionary<int, int>();
+
+                //Calculamos cuantas unidades x articulo tenemos
+                foreach (Articulo art in lsSelected)
+                {
+                    if(cantidadXitem.ContainsKey(art.id))
+                        cantidadXitem[art.id] ++;
+                    else
+                        cantidadXitem.Add(art.id, 1);
+                }
+
+                //Si lista de items carrito no tiene nada:
+                if (itemList.Count == 0)
+                {
+                    //Cargamos lista items carrito
+                    foreach (var item in cantidadXitem)
+                    {
+                        var art = lsSelected.Find(x => x.id == item.Key); // buscamos art x id, el id es unico por cada key
+                        itemList.Add( new CarritoItem(art, item.Value) ); // creamos el item del carrito con su art y su cantidad
+                    }
+                }
+                else //Si lista tiene articulos previos:
+                {
+                    //Acumulamos la cantidad de unidades x articulos
+                    foreach (CarritoItem item in itemList)
+                    {
+                        if (cantidadXitem.ContainsKey(item.Id))
+                            item.Cantidad += cantidadXitem[item.Id];
+                    }
+                }
+                return itemList;
+            }
+            return itemList;
+        }
+        //TODO: Mostrar Lista de Carrito
+        private void mostrarListaCarritoItem(List<CarritoItem> ls)
+        {
+            //( se va a mostrar CarritoItem no Session[selected] )
+            if (ls != null)
+            {
+                dgvCarrito.DataSource = ls;
+                dgvCarrito.DataBind();
+            }
+        }
+
+        protected void btnCargarCarrito_Click(object sender, EventArgs e)
+        {
+            //Apuntamos a la lista de art selecionados por el usuario y cargamos datos en grid(temporal)
+            lsCarrito = (List<Articulo>)Session["selected"];
+            mostrarListaCarritoItem(cargarListaCarritoItem(lsCarrito));
+        }
     }//fin
 }
