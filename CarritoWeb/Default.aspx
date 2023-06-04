@@ -51,14 +51,15 @@
         <ContentTemplate>
             <section class="row mt-3" aria-labelledby="aspnetTitle">
                 <asp:Label ID="lblAgregado" runat="server" Text="Label"></asp:Label>
-                <asp:DataList ID="DataList1" runat="server" DataKeyField="Id" RepeatColumns="3" OnItemCommand="DataList1_ItemCommand" CssClass="">
+                <asp:DataList ID="DataList1" runat="server" DataKeyField="Id" RepeatColumns="3" OnItemCommand="DataList1_ItemCommand">
                     <ItemTemplate>
+
                         <div class="card m-3 pt-2 bg-warning text-dark" style="width: 18rem;">
                             <div class="card-header text-center">
                                 <asp:Label ID="nomProdLabel" runat="server" Text='<%# Eval("nombre") %>' CssClass="fs-5" />
+                                <asp:Image ID="ImageCard" runat="server" ImageUrl='<%# Eval("urlImagen") %>'
+                                    class="card-img-top img-fluid imgCard" onerror="this.src='./Recursos/image-not-found.png'" />
                             </div>
-                            <asp:Image ID="ImageCard" runat="server" ImageUrl='<%# Eval("urlImagen") %>'
-                                class="card-img-top img-fluid imgCard" onerror="this.src='./Recursos/image-not-found.png'" />
                             <asp:Label ID="urlLabel" Visible="false" runat="server" Text='<%# Eval("urlImagen") %>' CssClass="fs-5" />
                             <div class="card-body">
                                 <h5>
@@ -66,13 +67,18 @@
                                 <p>
                                     <asp:Label ID="descripProdLabel" runat="server" Text='<%# Eval("descripicion") %>' CssClass="card-text" />
                                 </p>
+                                <p>
+                                    <asp:Label ID="precioProdLabel" runat="server" Text='<%# Eval("precio") %>' CssClass="card-text" />
+                                </p>
                             </div>
-                            <br />
-                                    <asp:Button ID="Button1" runat="server" CommandName="Seleccionar" OnClick="Button1_Click" Text="Agregar al Carrito" />
-                             <br />
                             <asp:Button Text="🛒 Agregar al carrito" ID="btnAgregar" CssClass="btn btn-outline-secondary mb-3 " CommandArgument='<%#Eval("id")%>' CommandName="Id_articulo" OnClick="btnAgregar_Click" runat="server" />
+                        </div>
+
                     </ItemTemplate>
                 </asp:DataList>
+                <div>
+                    <asp:Button Text="Cargar Carrito (solo por ahora)" runat="server" />
+                </div>
             </section>
         </ContentTemplate>
     </asp:UpdatePanel>

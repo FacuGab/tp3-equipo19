@@ -264,9 +264,8 @@ namespace CarritoWeb
         ///TODO: Metodos de prueba
         protected void DataList1_ItemCommand(object source, DataListCommandEventArgs e)
         {
-            string nom,url,marca,descrip;
-            //string nom = null, url = null;
-            //double precio = 0;
+            string nom, url, marca, descrip;
+            decimal precio = 0;
             if (e.CommandName == "Seleccionar")
             {
                 DataList1.SelectedIndex = e.Item.ItemIndex;
@@ -275,10 +274,12 @@ namespace CarritoWeb
                 url = ((Label)this.DataList1.SelectedItem.FindControl("urlLabel")).Text;
                 marca = ((Label)this.DataList1.SelectedItem.FindControl("marcaProdLabel")).Text;
                 descrip = ((Label)this.DataList1.SelectedItem.FindControl("descripProdLabel")).Text;
-                AgregarItem(nom, url, marca,descrip);
+                precio = Convert.ToDecimal(((Label)this.DataList1.SelectedItem.FindControl("precioProdLabel")).Text);
+
+                AgregarItem(nom, url, marca, descrip, precio);
 
                 lblAgregado.Text = "Producto Agregado: " + nom + " " + descrip;
-                Session["prueba"] = "Sesión usuario prueba";
+
             }
         }
         public void CargarDetalle()
@@ -288,28 +289,24 @@ namespace CarritoWeb
             dtb.Columns.Add("urlImagen", System.Type.GetType("System.String"));
             dtb.Columns.Add("marca", System.Type.GetType("System.String"));
             dtb.Columns.Add("descripicion", System.Type.GetType("System.String"));
-            //dtb.Columns.Add("canproducto", System.Type.GetType("System.Int32"));
+            dtb.Columns.Add("precio", System.Type.GetType("System.Int32"));
 
             Session["pedido"] = dtb;
         }
-        public void AgregarItem(string nom, string url, string marca, string descip)
+        public void AgregarItem(string nom, string url, string marca, string descip, decimal precio)
         {
-            //double total;
-            //int cantidad = 1;
-            //total = precio * cantidad;
+            decimal total;
+            int cantidad = 1;
+            total = precio * cantidad;
             carrito = (DataTable)Session["pedido"];
             DataRow fila = carrito.NewRow();
             fila[0] = nom;
             fila[1] = url;
             fila[2] = marca;
             fila[3] = descip;
-           // fila[4] = total;
+            fila[4] = total;
             carrito.Rows.Add(fila);
             Session["pedido"] = carrito;
-        }
-        protected void Button1_Click1(object sender, EventArgs e)
-        {
-
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
