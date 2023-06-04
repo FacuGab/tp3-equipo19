@@ -60,13 +60,22 @@ namespace CarritoWeb
         protected global::System.Web.UI.WebControls.Button btnFiltro;
 
         /// <summary>
-        /// repListaPrincipal control.
+        /// lblAgregado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater repListaPrincipal;
+        protected global::System.Web.UI.WebControls.Label lblAgregado;
+
+        /// <summary>
+        /// DataList1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList DataList1;
 
         /// <summary>
         /// btnEliminarLsCarrito control.

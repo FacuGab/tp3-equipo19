@@ -2,6 +2,7 @@
 using Negocio;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Web;
@@ -24,6 +25,10 @@ namespace CarritoWeb
         public int countItemCarrito { get; set; } = 0;
         public List<Articulo> listaArticulos { get; set; }
         public List<Articulo> lsCarrito { get; set; }
+
+        //metodo de prueba
+        DataTable dtb;
+        DataTable carrito = new DataTable();
 
         //TODO: LOAD
         protected void Page_Load(object sender, EventArgs e)
@@ -55,6 +60,10 @@ namespace CarritoWeb
                     //Apuntamos a la lista principal de articulos en bd y cargamos datos en rep
                     listaArticulos = (List<Articulo>)Session["listaPrincipal"];
                     cargarListaPrincipal(listaArticulos);
+
+                    //PRUEBA
+                    CargarDetalle();
+                    lblAgregado.Text = "";
                 }
 
                 //SI ES Postback, apuntamos a lista principal de art en bd
@@ -185,8 +194,10 @@ namespace CarritoWeb
         //TODO: Cargar Lista Principal
         private void cargarListaPrincipal(List<Articulo> list)
         {
-            repListaPrincipal.DataSource = list;
-            repListaPrincipal.DataBind();
+            //repListaPrincipal.DataSource = list;
+            //repListaPrincipal.DataBind();
+            DataList1.DataSource = list;
+            DataList1.DataBind();
         }
         //TODO: Cargar Lista de Carrito
         private List<CarritoItem> cargarListaCarritoItem(List<Articulo> lsSelected)
@@ -247,6 +258,62 @@ namespace CarritoWeb
                 dgvCarrito.DataBind();
                 lblCantArtCarrito.Text = countItemCarrito.ToString();
             }
+        }
+
+
+        ///TODO: Metodos de prueba
+        protected void DataList1_ItemCommand(object source, DataListCommandEventArgs e)
+        {
+            string nom,url,marca,descrip;
+            //string nom = null, url = null;
+            //double precio = 0;
+            if (e.CommandName == "Seleccionar")
+            {
+                DataList1.SelectedIndex = e.Item.ItemIndex;
+
+                nom = ((Label)this.DataList1.SelectedItem.FindControl("nomProdLabel")).Text;
+                url = ((Label)this.DataList1.SelectedItem.FindControl("urlLabel")).Text;
+                marca = ((Label)this.DataList1.SelectedItem.FindControl("marcaProdLabel")).Text;
+                descrip = ((Label)this.DataList1.SelectedItem.FindControl("descripProdLabel")).Text;
+                AgregarItem(nom, url, marca,descrip);
+
+                lblAgregado.Text = "Producto Agregado: " + nom + " " + descrip;
+                Session["prueba"] = "Sesión usuario prueba";
+            }
+        }
+        public void CargarDetalle()
+        {
+            dtb = new DataTable("Carrito");
+            dtb.Columns.Add("nombre", System.Type.GetType("System.String"));
+            dtb.Columns.Add("urlImagen", System.Type.GetType("System.String"));
+            dtb.Columns.Add("marca", System.Type.GetType("System.String"));
+            dtb.Columns.Add("descripicion", System.Type.GetType("System.String"));
+            //dtb.Columns.Add("canproducto", System.Type.GetType("System.Int32"));
+
+            Session["pedido"] = dtb;
+        }
+        public void AgregarItem(string nom, string url, string marca, string descip)
+        {
+            //double total;
+            //int cantidad = 1;
+            //total = precio * cantidad;
+            carrito = (DataTable)Session["pedido"];
+            DataRow fila = carrito.NewRow();
+            fila[0] = nom;
+            fila[1] = url;
+            fila[2] = marca;
+            fila[3] = descip;
+           // fila[4] = total;
+            carrito.Rows.Add(fila);
+            Session["pedido"] = carrito;
+        }
+        protected void Button1_Click1(object sender, EventArgs e)
+        {
+
+        }
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+
         }
     }//fin
 }

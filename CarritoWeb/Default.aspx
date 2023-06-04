@@ -50,24 +50,29 @@
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
             <section class="row mt-3" aria-labelledby="aspnetTitle">
-
-                <asp:Repeater ID="repListaPrincipal" runat="server">
+                <asp:Label ID="lblAgregado" runat="server" Text="Label"></asp:Label>
+                <asp:DataList ID="DataList1" runat="server" DataKeyField="Id" RepeatColumns="3" OnItemCommand="DataList1_ItemCommand" CssClass="">
                     <ItemTemplate>
                         <div class="card m-3 pt-2 bg-warning text-dark" style="width: 18rem;">
                             <div class="card-header text-center">
-                                <%#DataBinder.Eval( Container.DataItem, "nombre") %>
+                                <asp:Label ID="nomProdLabel" runat="server" Text='<%# Eval("nombre") %>' CssClass="fs-5" />
                             </div>
-                            <img src="<%#DataBinder.Eval( Container.DataItem, "UrlImagen") %>" class="card-img-top img-fluid imgCard" onerror="this.src='./Recursos/image-not-found.png'" alt="Imagen del articulo" />
+                            <asp:Image ID="ImageCard" runat="server" ImageUrl='<%# Eval("urlImagen") %>'
+                                class="card-img-top img-fluid imgCard" onerror="this.src='./Recursos/image-not-found.png'" />
+                            <asp:Label ID="urlLabel" Visible="false" runat="server" Text='<%# Eval("urlImagen") %>' CssClass="fs-5" />
                             <div class="card-body">
-                                <h5 class="card-title card-header text-center"><%#DataBinder.Eval( Container.DataItem, "marca")%></h5>
-                                <p class="card-text"><%#DataBinder.Eval( Container.DataItem, "descripicion")%></p>
-                                <p class="card-text"><%#DataBinder.Eval( Container.DataItem, "precio")%> $</p>
+                                <h5>
+                                    <asp:Label ID="marcaProdLabel" runat="server" Text='<%# Eval("marca") %>' CssClass="card-title card-header text-center" /></h5>
+                                <p>
+                                    <asp:Label ID="descripProdLabel" runat="server" Text='<%# Eval("descripicion") %>' CssClass="card-text" />
+                                </p>
                             </div>
-                            <asp:Button Text="🛒 Agregar al carrito" ID="btnAgregar" CssClass="btn btn-outline-secondary mb-4 " CommandArgument='<%#Eval("id")%>' CommandName="Id_articulo" OnClick="btnAgregar_Click" runat="server" />
-                        </div>
+                            <br />
+                                    <asp:Button ID="Button1" runat="server" CommandName="Seleccionar" OnClick="Button1_Click" Text="Agregar al Carrito" />
+                             <br />
+                            <asp:Button Text="🛒 Agregar al carrito" ID="btnAgregar" CssClass="btn btn-outline-secondary mb-3 " CommandArgument='<%#Eval("id")%>' CommandName="Id_articulo" OnClick="btnAgregar_Click" runat="server" />
                     </ItemTemplate>
-                </asp:Repeater>
-
+                </asp:DataList>
             </section>
         </ContentTemplate>
     </asp:UpdatePanel>
@@ -96,19 +101,6 @@
                         </p>
                         <p>
                             <asp:GridView runat="server" ID="dgvCarrito">
-                                <%--<label>Articulo XXX</label>
-                            <label>Cantidad: XXX</label>
-                            <label>Precio: XXX</label>
-                            <button class="btn btn-success">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                                </svg>
-                            </button>
-                            <button class="btn btn-danger">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                                </svg>
-                            </button>--%>
                             </asp:GridView>
                         </p>
                     </div>
