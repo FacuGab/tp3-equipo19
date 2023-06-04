@@ -34,8 +34,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link active text-black " aria-current="page" runat="server" href="~/">Catalogo</a>
                                 </li>
-                                <li class="nav-item text-right">
+<%--                                <li class="nav-item text-right">
                                     <a class="nav-link text-black" runat="server" href="~/ListaArticulos.aspx">Lista de Artículos</a>
+                                </li>--%>
+                                <li class="nav-item text-right">
+                                    <a class="nav-link text-black" runat="server" href="~/Detalle.aspx">Detalle(link temporal)</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-black" href="Carrito.aspx">Carrito</a>

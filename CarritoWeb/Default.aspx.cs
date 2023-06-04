@@ -67,6 +67,11 @@ namespace CarritoWeb
             }
         }
         //EVENTOS:
+        //TODO: BOTON FILTRO
+        protected void btnFiltro_Click(object sender, EventArgs e)
+        {
+            // hacer ..... 
+        }
         //TODO: FILTRO RAPIDO EVENTO
         protected void tbFiltroRapido_TextChanged(object sender, EventArgs e)
         {
@@ -151,9 +156,17 @@ namespace CarritoWeb
         protected void btnCargarCarrito_Click1(object sender, EventArgs e)
         {
             //Apuntamos a la lista de art selecionados por el usuario y cargamos datos en grid(temporal)
-            lsCarrito = (List<Articulo>)Session["selected"];
-            mostrarListaCarritoItem(cargarListaCarritoItem(lsCarrito));
-            lsCarrito.Clear();
+            try
+            {
+                lsCarrito = (List<Articulo>)Session["selected"];
+                mostrarListaCarritoItem(cargarListaCarritoItem(lsCarrito));
+                lsCarrito.Clear();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx");
+            }
         }
 
         //METODOS:
@@ -179,8 +192,9 @@ namespace CarritoWeb
         private List<CarritoItem> cargarListaCarritoItem(List<Articulo> lsSelected)
         {
             itemList = (List<CarritoItem>)Session["carritoItem"];
+            if (lsSelected == null) return null;
 
-            if ( (itemList != null && lsSelected != null) || lsSelected.Count > 0)
+            if (itemList != null  && lsSelected.Count > 0)
             {
                 //Creamos Dic cantidad x Item, <key, value>, donde el key es el id de art y el value la cantidad del art
                 cantidadXitem = new Dictionary<int, int>();
@@ -188,16 +202,16 @@ namespace CarritoWeb
                 //Calculamos cuantas unidades x articulo tenemos
                 foreach (Articulo art in lsSelected)
                 {
-                    if(cantidadXitem.ContainsKey(art.id))
-                        cantidadXitem[art.id] ++;
+                    if (cantidadXitem.ContainsKey(art.id))
+                        cantidadXitem[art.id]++;
                     else
                         cantidadXitem.Add(art.id, 1);
                 }
 
                 //Calculamos la cantidad total de articulos en carrito
-                foreach (var item in cantidadXitem)
-                {
-                    countItemCarrito += item.Value;
+                foreach (var item in cantidadXitem) 
+                { 
+                    countItemCarrito += item.Value; 
                 }
                 Session["countCarrito"] = countItemCarrito;
 
@@ -208,7 +222,7 @@ namespace CarritoWeb
                     foreach (var item in cantidadXitem)
                     {
                         var art = lsSelected.Find(x => x.id == item.Key); // buscamos art x id, el id es unico por cada key
-                        itemList.Add( new CarritoItem(art, item.Value) ); // creamos el item del carrito con su art y su cantidad
+                        itemList.Add(new CarritoItem(art, item.Value)); // creamos el item del carrito con su art y su cantidad
                     }
                 }
                 else //Si lista tiene articulos previos:
@@ -220,7 +234,6 @@ namespace CarritoWeb
                             item.Cantidad += cantidadXitem[item.Id];
                     }
                 }
-                return itemList;
             }
             return itemList;
         }
@@ -235,6 +248,5 @@ namespace CarritoWeb
                 lblCantArtCarrito.Text = countItemCarrito.ToString();
             }
         }
-
     }//fin
 }

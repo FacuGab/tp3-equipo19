@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="col-lg-2 ">
-            <asp:Button ID="btnFiltro" runat="server" Text="Aplicar" CssClass="btn btn-primary" />
+            <asp:Button ID="btnFiltro" runat="server" Text="Aplicar" OnClick="btnFiltro_Click" CssClass="btn btn-primary" />
         </div>
         <div class="col-lg-2"></div>
     </section>
@@ -61,7 +61,7 @@
                             <div class="card-body">
                                 <h5 class="card-title card-header text-center"><%#DataBinder.Eval( Container.DataItem, "marca")%></h5>
                                 <p class="card-text"><%#DataBinder.Eval( Container.DataItem, "descripicion")%></p>
-                                <p class="card-text"><%#DataBinder.Eval( Container.DataItem, "id")%></p>
+                                <p class="card-text"><%#DataBinder.Eval( Container.DataItem, "precio")%> $</p>
                             </div>
                             <asp:Button Text="🛒 Agregar al carrito" ID="btnAgregar" CssClass="btn btn-outline-secondary mb-4 " CommandArgument='<%#Eval("id")%>' CommandName="Id_articulo" OnClick="btnAgregar_Click" runat="server" />
                         </div>
