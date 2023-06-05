@@ -1,9 +1,6 @@
 ﻿using Dominio;
 using Negocio;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.UI;
@@ -13,17 +10,15 @@ namespace CarritoWeb
 {
     public partial class SiteMaster : System.Web.UI.MasterPage
     {
-        List<Articulo> lsCarrito;
-        List<CarritoItem> lsCarritoItem;
-        CarritoItem CarritoItem;
-        
+        public int countItems { get; set; } = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
                 if(!IsPostBack)
                 {
-                    
+                    if (Session["countCarrito"] != null)
+                        countItems = (int)Session["countCarrito"];
                 }
 
             }

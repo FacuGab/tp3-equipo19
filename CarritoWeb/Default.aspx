@@ -48,8 +48,8 @@
             </div>
         </div>
         <div class="col-lg-2 ">
-            <asp:Button ID="btnFiltro" runat="server" Text="Aplicar" OnClick="btnFiltro_Click" CssClass="btn btn-primary" />
-            <asp:Button ID="btnFiltro1" runat="server" Text="Eliminar" href="~/" OnClick="btnFiltro1_Click" CssClass="btn btn-danger" />
+            <asp:Button ID="btnAgregarFiltro" runat="server" Text="Aplicar" OnClick="btnAgregarFiltro_Click" CssClass="btn btn-primary" />
+            <asp:Button ID="btnEliminarFiltro1" runat="server" Text="Eliminar" href="~/" OnClick="btnEliminarFiltro_Click" CssClass="btn btn-danger" />
         </div>
         <div class="col-lg-2"></div>
     </section>

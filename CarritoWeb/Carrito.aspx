@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" />
     <style>
-        #filaCardCarrito{
+        #filaCardCarrito {
             padding-top: 100px; /* manu si ves esto y sabes como arreglarlo mandale, yo no sabia bien que hacerle */
         }
     </style>
@@ -27,7 +27,7 @@
                                         <Columns>
                                             <asp:TemplateField HeaderText="Quitar">
                                                 <ItemTemplate>
-                                                    <asp:ImageButton ID="ImageButton1" runat="server" Height="19px" ImageUrl="~/Recursos/Eliminar.png" Width="20px" />
+                                                    <asp:ImageButton ID="ibtEliminar" runat="server" CommandArgument='<%#Eval("Id") %>' CommandName="eliminar_btn" OnClick="ibtEliminar_Click" Height="19px" ImageUrl="~/Recursos/Eliminar.png" Width="20px" />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:BoundField DataField="nombre" HeaderText="Codigo" />
@@ -40,8 +40,8 @@
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="+/-">
                                                 <ItemTemplate>
-                                                    <asp:ImageButton id="btnAgregar" ImageUrl="~/Recursos/agregar.png" Height="19" Width="20" runat="server" />
-                                                    <asp:ImageButton id="btnQuitar" ImageUrl="~/Recursos/minimizar.png" Height="19" Width="20" runat="server" />
+                                                    <asp:ImageButton ID="btnAgregar" ImageUrl="~/Recursos/agregar.png" Height="19" Width="20" runat="server" />
+                                                    <asp:ImageButton ID="btnQuitar" ImageUrl="~/Recursos/minimizar.png" Height="19" Width="20" runat="server" />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                         </Columns>
@@ -50,13 +50,18 @@
                             </asp:UpdatePanel>
                         </div>
                         <div class="col">
-                            <h5 class="card-title">Total</h5>
-                            <p class="card-text"><%:totalFinal %> $ </p>
-                            <h5 class="card-title">Total de Unidades</h5>
-                            <p class="card-text"><%: countItemCarrito %> unidades </p>
-                            <a href="Default.aspx" class="btn btn-primary">Volver a Catalogo</a>
-                            <asp:Button Text="Eliminar" ID="btnEliminar" CssClass="btn btn-primary"  OnClick="btnEliminar_Click" runat="server" />
+                            <asp:UpdatePanel runat="server">
+                                <ContentTemplate>
 
+                                    <h5 class="card-title">Total</h5>
+                                    <p class="card-text"><%:totalFinal %> $ </p>
+                                    <h5 class="card-title">Total de Unidades</h5>
+                                    <p class="card-text"><%: countItemCarrito %> unidades </p>
+                                    <a href="Default.aspx" class="btn btn-primary">Volver a Catalogo</a>
+                                    <asp:Button Text="Eliminar" ID="btnEliminar" CssClass="btn btn-primary" OnClick="btnEliminar_Click" runat="server" />
+
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </div>
                     </div>
                 </div>

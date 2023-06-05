@@ -51,22 +51,22 @@ namespace CarritoWeb
         protected global::System.Web.UI.WebControls.DropDownList ddlCriterio;
 
         /// <summary>
-        /// btnFiltro control.
+        /// btnAgregarFiltro control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFiltro;
+        protected global::System.Web.UI.WebControls.Button btnAgregarFiltro;
 
         /// <summary>
-        /// btnFiltro1 control.
+        /// btnEliminarFiltro1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFiltro1;
+        protected global::System.Web.UI.WebControls.Button btnEliminarFiltro1;
 
         /// <summary>
         /// lblAgregado control.

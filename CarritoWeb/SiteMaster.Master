@@ -18,7 +18,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
+        <section>
             <!-- HEADER -->
             <header>
                 <!--Barra de navegaciíon-->
@@ -38,14 +38,17 @@
                                     <a class="nav-link text-black" runat="server" href="~/ListaArticulos.aspx">Lista de Artículos</a>
                                 </li>--%>
                                 <li class="nav-item text-right">
-                                    <a class="nav-link text-black" runat="server" href="~/Detalle.aspx">Detalle(link temporal)</a>
+                                    <a class="nav-link text-black" runat="server" href="~/Detalle.aspx">Detalle</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-black" href="Carrito.aspx" OnClick="btnCargarCarrito_Click1">🛒 Carrito</a>
                                 </li>
                                 <li class="nav-item ml-5">
                                     <a href="#" Class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                                        <img src="Recursos/Carrito.png" class="img-fluid" alt="icono-carrito" id="navBarIconCarrito" />
+                                        <%--<img src="Recursos/Carrito.png" class="img-fluid" alt="icono-carrito" id="navBarIconCarrito" />--%>
+                                        <span type="button" class="btn btn-primary">
+                                          # <span class="badge text-bg-secondary"><%: countItems %></span>
+                                        </span>
                                     </a>
                                 </li>
                             </ul>
@@ -58,7 +61,7 @@
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
-        </div>
+        </section>
         <!-- FOOTER -->
         <footer class="text-center text-lg-start text-light pt-5 bg-black">
             <section id="contacto" class="foot">

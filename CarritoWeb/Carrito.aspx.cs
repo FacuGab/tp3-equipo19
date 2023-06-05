@@ -1,11 +1,7 @@
 ﻿using Dominio;
-using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace CarritoWeb
@@ -36,7 +32,7 @@ namespace CarritoWeb
                 if (Session["totalCarrito"] == null)
                     Session.Add("totalCarrito", total);
                 else
-                    total = (decimal)Session["totalCarrito"];
+                    total = Convert.ToDecimal(Session["totalCarrito"]);
 
                 var ls = (List<Articulo>)Session["selected"];
                 mostrarListaCarritoItem( cargarListaCarritoItem(ls) );
@@ -99,19 +95,18 @@ namespace CarritoWeb
                 }
                 else //Si lista tiene articulos previos:
                 {
-
-
                     //Acumulamos la cantidad de unidades x articulos
-                    foreach (CarritoItem item in itemList)
+                    //(es medio una flasheada el bucle, no se si es buena practica o no utilizarlo asi, quizas un for para utilizar i ...)
+                    foreach (var item in items_x_articulo)
                     {
-                        if (items_x_articulo.ContainsKey(item.Id))
+                        if (itemList.Exists(art => art.Id == item.Key))
                         {
-                            item.Cantidad += items_x_articulo[item.Id];
+                            itemList[ itemList.FindIndex(art => art.Id == item.Key) ].Cantidad += item.Value;
                         }
                         else
                         {
-                            var art = lsSelected.Find(x => x.id == item.Id);
-                            itemList.Add(new CarritoItem(art, 1));
+                            var newArt = lsSelected.Find(art => art.id == item.Key);
+                            itemList.Add(new CarritoItem(newArt, 1));
                         }
                     }
                 }
@@ -123,13 +118,14 @@ namespace CarritoWeb
         //TODO: Mostrar Lista de Carrito
         private void mostrarListaCarritoItem(List<CarritoItem> ls)
         {
-            //( se va a mostrar CarritoItem no Session[selected] )
+            //( se va a mostrar CarritoItem )
             if (ls != null)
             {
                 dgvCarrito.DataSource = ls;
                 dgvCarrito.DataBind();
             }
         }
+        
         //TODO: Boton ELMINAR
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -145,12 +141,55 @@ namespace CarritoWeb
                     Session.Remove("countCarrito");
                     Session.Add("countCarrito", 0);
                 }
+                if (Session["totalCarrito"] != null)
+                {
+                    Session.Remove("totalCarrito");
+                    Session.Add("totalCarrito", 0);
+                }
                 Response.Redirect("Carrito.aspx", false);
             }
             catch (Exception ex)
             {
                 Session.Add("error", ex);
                 Response.Redirect("Error.aspx");
+            }
+        }
+
+        //TODO: Boton Eliminar Item de lista Carrito
+        protected void ibtEliminar_Click(object sender, System.Web.UI.ImageClickEventArgs e)
+        {
+            try
+            {
+                if (Session["carritoItem"] == null)
+                    return;
+
+                //Cargamos variables y el id del item a quitar
+                itemList = (List<CarritoItem>)Session["carritoItem"];
+                var btn = (ImageButton)sender;
+                int idItem = int.Parse(btn.CommandArgument);
+
+                //Buscamos el item en lista CarritoItem y lo quitamos
+                //restamos cantidad y total del carrito
+                CarritoItem item = itemList.Find(itm => itm.Id == idItem);
+                if(item != null)
+                {
+                    int countCarrito = (int)Session["countCarrito"];
+                    decimal totalParcial = (decimal)Session["totalCarrito"];
+
+                    countCarrito -= item.Cantidad;
+                    totalParcial -= ( Convert.ToDecimal(item.Cantidad) * item.Precio );
+
+                    Session["countCarrito"] = countCarrito;
+                    Session["totalCarrito"] = totalParcial;
+                    itemList.Remove(item);
+                }
+                //Volvemos a cargar la lista en el dgv
+                mostrarListaCarritoItem(itemList);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
             }
         }
 

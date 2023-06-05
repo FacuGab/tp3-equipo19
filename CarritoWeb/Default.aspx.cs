@@ -78,7 +78,7 @@ namespace CarritoWeb
 
         //EVENTOS:
         //TODO: BOTON FILTRO
-        protected void btnFiltro_Click(object sender, EventArgs e)
+        protected void btnAgregarFiltro_Click(object sender, EventArgs e)
         {
             listaArticulos = (List<Articulo>)Session["listaPrincipal"];
             List<Articulo> listaFiltrada = new List<Articulo>();
@@ -169,7 +169,6 @@ namespace CarritoWeb
                     lsTemporal = (List<Articulo>)Session["selected"];
                     lsTemporal.AddRange(lsPrincipal.FindAll(itm => itm.id == idArticulo));
                 }
-
                 cargarListaPrincipal(listaArticulos);
             }
             catch (Exception ex)
@@ -179,30 +178,14 @@ namespace CarritoWeb
             }
         }
 
-        //TOOD: BOTON ELIMINAR LISTA ITEMS CARRITO
-        protected void btnEliminarLsCarrito_Click(object sender, EventArgs e)
+        //TODO: BOTON BORRAR FILTROS
+        protected void btnEliminarFiltro_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (Session["carritoItem"] != null)
-                {
-                    Session.Remove("carritoItem");
-                    Session.Add("carritoItem", new List<CarritoItem>());
-                }
-                if (Session["countCarrito"] != null)
-                {
-                    Session.Remove("countCarrito");
-                    Session.Add("countCarrito", 0);
-                }
-                Response.Redirect("Default.aspx", false);
-            }
-            catch (Exception ex)
-            {
-                Session.Add("error", ex);
-                Response.Redirect("Error.aspx");
-            }
+            Response.Redirect("~/default.aspx");
         }
 
+        //METODOS:
+        //TODO Cargar filtros
         private void cargarFiltros()
         {
             ddlFiltroMarca.DataSource = negocio.LeerMarcas();
@@ -218,6 +201,7 @@ namespace CarritoWeb
             ddlCriterio.Items.Add("Ambos");
             ddlCriterio.SelectedIndex = 2;
         }
+
         //TODO: Cargar Lista Principal
         private void cargarListaPrincipal(List<Articulo> list)
         {
@@ -227,87 +211,6 @@ namespace CarritoWeb
             DataList1.DataBind();
         }
 
-        //TODO: BOTON CARGAR CARRITO
-        //protected void btnCargarCarrito_Click1(object sender, EventArgs e)
-        //{
-        //    //Apuntamos a la lista de art selecionados por el usuario y cargamos datos en grid(temporal)
-        //    try
-        //    {
-        //        lsCarrito = (List<Articulo>)Session["selected"];
-        //        mostrarListaCarritoItem(cargarListaCarritoItem(lsCarrito));
-        //        lsCarrito.Clear();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Session.Add("error", ex);
-        //        Response.Redirect("Error.aspx");
-        //    }
-        //}
-
-        //METODOS:
-        //TODO: Cargar Filtros
-
-
-        //TODO: Cargar Lista de Carrito
-        //private List<CarritoItem> cargarListaCarritoItem(List<Articulo> lsSelected)
-        //{
-        //    itemList = (List<CarritoItem>)Session["carritoItem"];
-        //    if (lsSelected == null) return null;
-
-        //    if (itemList != null  && lsSelected.Count > 0)
-        //    {
-        //        //Creamos Dic cantidad x Item, <key, value>, donde el key es el id de art y el value la cantidad del art
-        //        cantidadXitem = new Dictionary<int, int>();
-
-        //        //Calculamos cuantas unidades x articulo tenemos
-        //        foreach (Articulo art in lsSelected)
-        //        {
-        //            if (cantidadXitem.ContainsKey(art.id))
-        //                cantidadXitem[art.id]++;
-        //            else
-        //                cantidadXitem.Add(art.id, 1);
-        //        }
-
-        //        //Calculamos la cantidad total de articulos en carrito
-        //        foreach (var item in cantidadXitem) 
-        //        { 
-        //            countItemCarrito += item.Value; 
-        //        }
-        //        Session["countCarrito"] = countItemCarrito;
-
-        //        //Si lista de items carrito no tiene nada:
-        //        if (itemList.Count == 0)
-        //        {
-        //            //Cargamos lista items carrito
-        //            foreach (var item in cantidadXitem)
-        //            {
-        //                var art = lsSelected.Find(x => x.id == item.Key); // buscamos art x id, el id es unico por cada key
-        //                itemList.Add(new CarritoItem(art, item.Value)); // creamos el item del carrito con su art y su cantidad
-        //            }
-        //        }
-        //        else //Si lista tiene articulos previos:
-        //        {
-        //            //Acumulamos la cantidad de unidades x articulos
-        //            foreach (CarritoItem item in itemList)
-        //            {
-        //                if (cantidadXitem.ContainsKey(item.Id))
-        //                    item.Cantidad += cantidadXitem[item.Id];
-        //            }
-        //        }
-        //    }
-        //    return itemList;
-        //}
-        ////TODO: Mostrar Lista de Carrito
-        //private void mostrarListaCarritoItem(List<CarritoItem> ls)
-        //{
-        //    //( se va a mostrar CarritoItem no Session[selected] )
-        //    if (ls != null)
-        //    {
-        //        //dgvCarrito.DataSource = ls;
-        //        //dgvCarrito.DataBind();
-        //        //lblCantArtCarrito.Text = countItemCarrito.ToString();
-        //    }
-        //}
 
 
         ///TODO: Metodos de prueba
@@ -360,10 +263,6 @@ namespace CarritoWeb
         protected void Button1_Click(object sender, EventArgs e)
         {
 
-        }
-        protected void btnFiltro1_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/default.aspx");
         }
     }//fin
 }
