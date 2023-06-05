@@ -80,7 +80,40 @@ namespace CarritoWeb
         //TODO: BOTON FILTRO
         protected void btnFiltro_Click(object sender, EventArgs e)
         {
-            // hacer ..... 
+            listaArticulos = (List<Articulo>)Session["listaPrincipal"];
+            List<Articulo> listaFiltrada = new List<Articulo>();
+
+            try
+            {
+                foreach (var articulo in listaArticulos)
+                {
+                    if (ddlFiltroCategoria.Text == "Solo categoria")
+                    {
+                        // valida que el contenido del combo categoria sea igual o similar
+                        listaFiltrada.AddRange(listaArticulos.FindAll(x => x.categoria.categoria.Contains(ddlFiltroCategoria.Text)));
+                    }
+                    else if (ddlFiltroMarca.Text == "Solo marca")
+                    {
+                        // valida que el contenido del combo marca sea igual o similar
+                        listaFiltrada.AddRange(listaArticulos.FindAll(x => x.marca.marca.Contains(ddlFiltroMarca.Text)));
+                    }
+                    else
+                    {
+                        // valida que el contenido de los dos combos sean iguales
+                        listaFiltrada.AddRange(listaArticulos.FindAll(x =>
+                            x.categoria.categoria.Contains(ddlFiltroCategoria.Text)
+                            && x.marca.marca.Contains(ddlFiltroMarca.Text)));
+                    }
+                }
+                // Eliminar duplicados en la lista filtrada
+                listaFiltrada = listaFiltrada.Distinct().ToList();
+                cargarListaPrincipal(listaFiltrada);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx");
+            }
         }
 
         //TODO: FILTRO RAPIDO EVENTO
@@ -180,6 +213,10 @@ namespace CarritoWeb
             ddlFiltroCategoria.DataBind();
             ddlFiltroCategoria.DataValueField = "IdCategoria";
             ddlFiltroCategoria.DataTextField = "categoria";
+            ddlCriterio.Items.Add("Solo categoría");
+            ddlCriterio.Items.Add("Solo marca");
+            ddlCriterio.Items.Add("Ambos");
+            ddlCriterio.SelectedIndex = 2;
         }
         //TODO: Cargar Lista Principal
         private void cargarListaPrincipal(List<Articulo> list)
@@ -323,6 +360,10 @@ namespace CarritoWeb
         protected void Button1_Click(object sender, EventArgs e)
         {
 
+        }
+        protected void btnFiltro1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/default.aspx");
         }
     }//fin
 }

@@ -27,18 +27,25 @@
         </div>
         <div class="col-lg-2">
             <div class="form-floating">
-                <asp:DropDownList ID="ddlFiltroCategoria" CssClass="form-select h-1" runat="server"></asp:DropDownList>
+                <asp:DropDownList ID="ddlFiltroCategoria" CssClass="form-select h-1" runat="server" AutoPostBack="false"></asp:DropDownList>
                 <label for="ddlFiltroCategoria">Categoría</label>
             </div>
         </div>
         <div class="col-lg-2">
             <div class="form-floating">
-                <asp:DropDownList ID="ddlFiltroMarca" CssClass="form-select" runat="server"></asp:DropDownList>
+                <asp:DropDownList ID="ddlFiltroMarca" CssClass="form-select" runat="server" AutoPostBack="false"></asp:DropDownList>
                 <label for="ddlFiltroMarca">Marca</label>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="form-floating">
+                <asp:DropDownList ID="ddlCriterio" CssClass="form-select" runat="server" AutoPostBack="false"></asp:DropDownList>
+                <label for="ddlFiltroMarca">Criterio</label>
             </div>
         </div>
         <div class="col-lg-2 ">
             <asp:Button ID="btnFiltro" runat="server" Text="Aplicar" OnClick="btnFiltro_Click" CssClass="btn btn-primary" />
+            <asp:Button ID="btnFiltro1" runat="server" Text="Eliminar" href="~/" OnClick="btnFiltro1_Click" CssClass="btn btn-danger" />
         </div>
         <div class="col-lg-2"></div>
     </section>
