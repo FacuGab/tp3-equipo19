@@ -5,11 +5,15 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" />
-
+    <style>
+        #filaTituloContador{
+            padding-top:50px; /* Manu!, si ves esto y pensas que se puede hacer mejor de otra forma, mandale */
+        }
+    </style>
 
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
-            <div class="row">
+            <div class="row" id="filaTituloContador">
                 <h1 id="nuestrosProd" class="text-center text-light mt-5 mb-5 p-2">Nuestros productos</h1>
                 <h2 class="text-center text-light mt-5 mb-5 p-2">Cantidad de Articulos Seleccionados: <span class="badge text-bg-primary"><%: countArticulos %></span></h2>
             </div>
@@ -55,6 +59,8 @@
         <ContentTemplate>
             <section class="row mt-3" aria-labelledby="aspnetTitle">
                 <asp:Label ID="lblAgregado" runat="server" Text="Label"></asp:Label>
+
+                <!-- DATA LIST -->
                 <asp:DataList ID="DataList1" runat="server" DataKeyField="Id" RepeatColumns="3" OnItemCommand="DataList1_ItemCommand">
                     <ItemTemplate>
 
@@ -77,7 +83,7 @@
                             </div>
                             <asp:Button Text="🛒 Agregar al carrito" ID="btnAgregar" CssClass="btn btn-outline-secondary mb-3 " CommandArgument='<%#Eval("id")%>' CommandName="Id_articulo" OnClick="btnAgregar_Click" runat="server" />
                         </div>
-                        <!-- falta el otro boton comentado -->
+                        <!-- falta el otro boton comentado ¿? -->
                     </ItemTemplate>
                 </asp:DataList>
             </section>

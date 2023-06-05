@@ -99,11 +99,20 @@ namespace CarritoWeb
                 }
                 else //Si lista tiene articulos previos:
                 {
+
+
                     //Acumulamos la cantidad de unidades x articulos
                     foreach (CarritoItem item in itemList)
                     {
                         if (items_x_articulo.ContainsKey(item.Id))
+                        {
                             item.Cantidad += items_x_articulo[item.Id];
+                        }
+                        else
+                        {
+                            var art = lsSelected.Find(x => x.id == item.Id);
+                            itemList.Add(new CarritoItem(art, 1));
+                        }
                     }
                 }
             }
@@ -119,6 +128,29 @@ namespace CarritoWeb
             {
                 dgvCarrito.DataSource = ls;
                 dgvCarrito.DataBind();
+            }
+        }
+        //TODO: Boton ELMINAR
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Session["carritoItem"] != null)
+                {
+                    Session.Remove("carritoItem");
+                    Session.Add("carritoItem", new List<CarritoItem>());
+                }
+                if (Session["countCarrito"] != null)
+                {
+                    Session.Remove("countCarrito");
+                    Session.Add("countCarrito", 0);
+                }
+                Response.Redirect("Carrito.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx");
             }
         }
 

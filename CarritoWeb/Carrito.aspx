@@ -5,12 +5,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" />
     <style>
-        #section_carrito {
-            margin-top: 200px
+        #filaCardCarrito{
+            padding-top: 100px; /* manu si ves esto y sabes como arreglarlo mandale, yo no sabia bien que hacerle */
         }
     </style>
     <section class="container" id="section_carrito">
-        <div class="row">
+        <div class="row" id="filaCardCarrito">
             <div class="card text-center">
                 <div class="card-header">
                     <h3>Resumen Carrito</h3>
@@ -55,7 +55,8 @@
                             <h5 class="card-title">Total de Unidades</h5>
                             <p class="card-text"><%: countItemCarrito %> unidades </p>
                             <a href="Default.aspx" class="btn btn-primary">Volver a Catalogo</a>
-                            <a href="#" class="btn btn-primary">Eliminar</a>
+                            <asp:Button Text="Eliminar" ID="btnEliminar" CssClass="btn btn-primary"  OnClick="btnEliminar_Click" runat="server" />
+
                         </div>
                     </div>
                 </div>
