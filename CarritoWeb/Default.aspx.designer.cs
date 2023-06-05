@@ -51,6 +51,15 @@ namespace CarritoWeb
         protected global::System.Web.UI.WebControls.DropDownList ddlFiltroMarca;
 
         /// <summary>
+        /// ddlCriterio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCriterio;
+
+        /// <summary>
         /// btnFiltro control.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace CarritoWeb
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnFiltro;
+
+        /// <summary>
+        /// btnFiltro1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnFiltro1;
 
         /// <summary>
         /// lblAgregado control.
