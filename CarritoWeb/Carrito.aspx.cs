@@ -179,8 +179,11 @@ namespace CarritoWeb
                     countCarrito -= item.Cantidad;
                     totalParcial -= ( Convert.ToDecimal(item.Cantidad) * item.Precio );
 
+                    //Re-asignamos nuevos valores
                     Session["countCarrito"] = countCarrito;
                     Session["totalCarrito"] = totalParcial;
+                    total = totalParcial;
+                    countItemCarrito = countCarrito;
                     itemList.Remove(item);
                 }
                 //Volvemos a cargar la lista en el dgv
