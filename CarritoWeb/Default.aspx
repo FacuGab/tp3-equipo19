@@ -6,15 +6,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" />
 
-    <div class="row">
-        <asp:Button Text="Cargar Carrito" CssClass="btn-primary" ID="btnCargarCarrito" OnClick="btnCargarCarrito_Click1" runat="server" />
-    </div>
 
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
             <div class="row">
                 <h1 id="nuestrosProd" class="text-center text-light mt-5 mb-5 p-2">Nuestros productos</h1>
-                <h2 class="text-center text-light mt-5 mb-5 p-2">Cantidad de Articulos: <span class="badge text-bg-primary"><%: countArticulos %></span></h2>
+                <h2 class="text-center text-light mt-5 mb-5 p-2">Cantidad de Articulos Seleccionados: <span class="badge text-bg-primary"><%: countArticulos %></span></h2>
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
@@ -68,53 +65,17 @@
                                     <asp:Label ID="descripProdLabel" runat="server" Text='<%# Eval("descripicion") %>' CssClass="card-text" />
                                 </p>
                                 <p>
-                                    <asp:Label ID="precioProdLabel" runat="server" Text='<%# Eval("precio") %>' CssClass="card-text" />
+                                    <asp:Label ID="precioProdLabel" runat="server" Text='<%# Eval("roundPrecio") %>' CssClass="card-text" />
                                 </p>
                             </div>
                             <asp:Button Text="🛒 Agregar al carrito" ID="btnAgregar" CssClass="btn btn-outline-secondary mb-3 " CommandArgument='<%#Eval("id")%>' CommandName="Id_articulo" OnClick="btnAgregar_Click" runat="server" />
                         </div>
-
+                        <!-- falta el otro boton comentado -->
                     </ItemTemplate>
                 </asp:DataList>
-                <div>
-                    <asp:Button Text="Cargar Carrito (solo por ahora)" runat="server" />
-                </div>
             </section>
         </ContentTemplate>
     </asp:UpdatePanel>
 
-    <!-- CARRITO -->
-    <asp:UpdatePanel runat="server">
-        <ContentTemplate>
-            <section class="row">
-
-                <!--Canvas carrito de compras -->
-                <div class="offcanvas offcanvas-end bg-black text-light w-25" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-                    <div class="offcanvas-header">
-                        <h5 id="offcanvasRightLabel">Carrito de compras</h5>
-                        <asp:Button Text="Eliminar Lista" ID="btnEliminarLsCarrito" CssClass="btn" OnClick="btnEliminarLsCarrito_Click" runat="server" />
-                        <button type="button" class="btn-link text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <!-- ACA IRIA LA LISTA DE ARTICULOS EN EL CARRITO (ESTO TENDRIA QUE IR EN UNA REP, FOREACH O DGV PARA CARGAR DE UNA LISTA FILTRADA) -->
-                        <p>
-                            <label>Cantidad de Articulos</label>
-                            <asp:Label Text="0" ID="lblCantArtCarrito" runat="server" />
-                        </p>
-                        <p>
-                            <label>Total:</label>
-                            <asp:Label Text="0$" ID="lblTotalCarrito" runat="server" />
-                        </p>
-                        <p>
-                            <asp:GridView runat="server" ID="dgvCarrito">
-                            </asp:GridView>
-                        </p>
-                    </div>
-                </div>
-                <!-- Fin Canvas -->
-
-            </section>
-        </ContentTemplate>
-    </asp:UpdatePanel>
     <!-- Fin Default.aspx -->
 </asp:Content>

@@ -34,5 +34,9 @@ namespace Dominio
         public List<string> imagenes { get; set; }
         [DisplayName("URL")] 
         public string UrlImagen { get; set; }
+
+        public string roundPrecio { 
+            get { return string.Format("{000:0.00}", precio); } 
+        }
     }
 }

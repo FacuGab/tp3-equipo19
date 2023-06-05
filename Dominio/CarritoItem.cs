@@ -20,5 +20,6 @@ namespace Dominio
         public string Nombre { get; set; }
         public decimal Precio { get; set; }
         public int Cantidad { get; set; }
+        public string roundPrecio { get { return string.Format("{000:0.00}", Precio); } }
     }
 }

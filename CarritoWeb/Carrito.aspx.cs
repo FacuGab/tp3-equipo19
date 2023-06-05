@@ -15,34 +15,62 @@ namespace CarritoWeb
         public List<Articulo> lista;
         public List<CarritoItem> itemList;
         public Dictionary<int,int> items_x_articulo;
+        public Dictionary<int,decimal> totalParcial;
         public int countItemCarrito = 0;
+        private decimal total;
+        public string totalFinal
+        {
+            get { return string.Format("{000:0.00}", total); }
+        }
+
+        //LOAD
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Page.IsPostBack == false)
+            if (!IsPostBack)
             {
+                if (Session["countCarrito"] == null)
+                    Session.Add("countCarrito", 0);
+                else
+                    countItemCarrito = (int)Session["countCarrito"];
+
+                if (Session["totalCarrito"] == null)
+                    Session.Add("totalCarrito", total);
+                else
+                    total = (decimal)Session["totalCarrito"];
+
                 var ls = (List<Articulo>)Session["selected"];
                 mostrarListaCarritoItem( cargarListaCarritoItem(ls) );
             }
         }
 
-        //TODO: Cargar Lista de Carrito
+        //TODO: Cargar Lista de Carrito (calcula tota, total unidades y carga lista)
         private List<CarritoItem> cargarListaCarritoItem(List<Articulo> lsSelected)
         {
+            if (lsSelected == null) 
+                return null;
             itemList = (List<CarritoItem>)Session["carritoItem"];
-            if (lsSelected == null) return null;
 
             if (itemList != null && lsSelected.Count > 0)
             {
+                //Parcial para calcular el total
+                totalParcial = new Dictionary<int, decimal>();
+
                 //Creamos Dic cantidad x Item, <key, value>, donde el key es el id de art y el value la cantidad del art
                 items_x_articulo = new Dictionary<int, int>();
 
-                //Calculamos cuantas unidades x articulo tenemos
+                //Calculamos cuantas unidades x articulo tenemos y acumulamos el total en costo
                 foreach (Articulo art in lsSelected)
                 {
                     if (items_x_articulo.ContainsKey(art.id))
+                    {
                         items_x_articulo[art.id]++;
+                        totalParcial[art.id] += art.precio;
+                    }
                     else
+                    {
                         items_x_articulo.Add(art.id, 1);
+                        totalParcial.Add(art.id, art.precio);
+                    }
                 }
 
                 //Calculamos la cantidad total de articulos en carrito
@@ -51,6 +79,13 @@ namespace CarritoWeb
                     countItemCarrito += item.Value;
                 }
                 Session["countCarrito"] = countItemCarrito;
+
+                //Calculamos el total en carrito
+                foreach (var item in totalParcial)
+                {
+                    total += item.Value;
+                }
+                Session["totalCarrito"] = total;
 
                 //Si lista de items carrito no tiene nada:
                 if (itemList.Count == 0)
@@ -72,8 +107,10 @@ namespace CarritoWeb
                     }
                 }
             }
+            lsSelected.Clear();
             return itemList;
         }
+
         //TODO: Mostrar Lista de Carrito
         private void mostrarListaCarritoItem(List<CarritoItem> ls)
         {
@@ -82,11 +119,10 @@ namespace CarritoWeb
             {
                 dgvCarrito.DataSource = ls;
                 dgvCarrito.DataBind();
-                //lblCantArtCarrito.Text = countItemCarrito.ToString();
             }
         }
 
-
+        // --------------------------------------------------------------------------------------------------------------------------------
         //public void cargarcarrito()
         //{
         //    GridView1.DataSource = Session["pedido"];

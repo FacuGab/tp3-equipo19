@@ -31,7 +31,7 @@
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:BoundField DataField="nombre" HeaderText="Codigo" />
-                                            <asp:BoundField DataField="precio" HeaderText="Precio" />
+                                            <asp:BoundField DataField="roundPrecio" HeaderText="Precio" />
                                             <asp:BoundField DataField="cantidad" HeaderText="Cantidad" />
                                             <asp:TemplateField HeaderText="Ir">
                                                 <ItemTemplate>
@@ -51,10 +51,10 @@
                         </div>
                         <div class="col">
                             <h5 class="card-title">Total</h5>
-                            <p class="card-text">... $ </p>
+                            <p class="card-text"><%:totalFinal %> $ </p>
                             <h5 class="card-title">Total de Unidades</h5>
-                            <p class="card-text">... unidades </p>
-                            <a href="#" class="btn btn-primary">Volver a Catalogo</a>
+                            <p class="card-text"><%: countItemCarrito %> unidades </p>
+                            <a href="Default.aspx" class="btn btn-primary">Volver a Catalogo</a>
                             <a href="#" class="btn btn-primary">Eliminar</a>
                         </div>
                     </div>
