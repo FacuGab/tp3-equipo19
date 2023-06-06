@@ -78,6 +78,7 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+
         //TODO: LISTAR CON SP
         public List<Articulo> ListarSP()
         {
@@ -133,6 +134,7 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+
         //TODO: CBO BOX CATEGORIAS
         public List<Categoria> LeerCategorias()
         {
@@ -166,6 +168,7 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+
         //TODO: CBO BOX MARCAS
         public List<Marca> LeerMarcas()
         {
@@ -199,6 +202,7 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+
         //TODO: Agregar Datos
         public int Agregar(Articulo nuevoArticulo)
         {
@@ -226,6 +230,7 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+
         //TODO: Modificar artículo
         public int Modificar(Articulo nuevoArticulo)
         {
@@ -255,6 +260,7 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+
         //TODO: Eliminar Artículo
         public  int Eliminar(int id)
         {
@@ -277,6 +283,7 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+
         //TODO: Agregar Imagen a la bd
         public int AgregarImg(int id, string urlImagen)
         {
@@ -299,6 +306,7 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+
         //TODO: Modificar Imagen 
         public int ModificarImg(int Id, string urlImg)
         {
@@ -325,6 +333,7 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+
         //TODO: Comprobar Img
         public bool ComprobarImg(int idArt)
         {
@@ -349,6 +358,39 @@ namespace Negocio
                 datosAux.CerrarConexion();
             }
         }
+
+        //TODO: Cargar Imagenes por Id(Articulo)
+        public List<string> CargarImgXart(int idArt)
+        {
+            Database datosAux = new Database();
+            List<string> list = null;
+            try
+            {
+                datosAux.AbrirConexion();
+                datosAux.setQuery("SELECT ImagenUrl FROM IMAGENES WHERE IdArticulo = @id");
+                datosAux.setearParamento("@id", idArt);
+                datosAux.readData();
+                if (datosAux.reader != null)
+                {
+                    list = new List<string>();
+                    while(datosAux.reader.Read())
+                    {
+                        list.Add(datosAux.reader["ImagenUrl"].ToString());
+                    }
+                    return list;
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datosAux.CerrarConexion();
+            }
+        }
+
         // Metodos Internos
         //TODO: Eliminar Img
         private int EliminarImgBd(int idArt) // ver si usar
@@ -370,6 +412,7 @@ namespace Negocio
                 datosAux.CerrarConexion();
             }
         }
+
         //TODO: Agregar url Img (privado)
         private int AgregarImgAux(int idArt, string urlImg)
         {

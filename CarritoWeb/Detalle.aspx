@@ -15,8 +15,31 @@
         <div class="col">
             <div class="card mb-3" id="cardDetalle" style="max-width: 540px;">
                 <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="<%:articulo.UrlImagen %>" onerror="this.src='./Recursos/image-not-found.png'" class="img-fluid rounded-start" alt="...">
+                    <div class="col-md-6">
+                        <%--<img src="<%:articulo.UrlImagen %>" onerror="this.src='./Recursos/image-not-found.png'" class="img-fluid rounded-start" alt="...">--%>
+                        <div id="carouselExample" class="carousel slide">
+                            <div class="carousel-inner">
+
+                                <%
+                                    if (imagenes_x_articulo == null) return;
+                                    for(int i = 0; i < imagenes_x_articulo.Count;  i++)
+                                    {
+                                %>
+                                <div class="carousel-item active">
+                                    <img src="<%:imagenes_x_articulo[i] %>" onerror="this.src='./Recursos/image-not-found.png'" class="d-block w-100" alt="...">
+                                </div>
+                                <%
+                                    } %>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -40,4 +63,7 @@
             <a href="Carrito.aspx" class="icon-link">Volver</a>
         </div>
     </div>
+
+
+
 </asp:Content>
