@@ -16,6 +16,7 @@ namespace Negocio
     {
         //TODO: VARIABLES NEGOCIO:
         private SqlDataReader lector = null;
+        private SqlDataAdapter lectorImgs = null;
         private Database datos;
         public List<Articulo> articulos;
         public List<Categoria> categorias;
@@ -90,7 +91,6 @@ namespace Negocio
                 datos.AbrirConexion();
                 datos.setSP("spListar");
                 datos.readData();
-                lector = datos.reader;
 
                 while (lector.Read())
                 {
@@ -111,9 +111,11 @@ namespace Negocio
                     artAux.precio = Convert.ToDecimal(lector["Precio"]);
                     if (!(lector["URL"] is DBNull))
                         artAux.UrlImagen = lector["URL"].ToString(); // cuidado, si tiene mas fotos no se como cargarlas, hay que usar una query y modo distinto
-                    // metodo lector de imagenes ?
+                    
+
                     articulos.Add(artAux);
                 }
+
                 return articulos;
 
             }

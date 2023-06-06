@@ -10,7 +10,8 @@
     </style>
     <section class="row">
 
-        <div class="col-3"></div>
+        <div class="col-3">
+        </div>
         <div class="col">
             <div class="card mb-3" id="cardDetalle" style="max-width: 540px;">
                 <div class="row g-0">
@@ -34,4 +35,9 @@
         <div class="col-2"></div>
 
     </section>
+    <div class="row">
+        <div class="align-items-center">
+            <a href="Carrito.aspx" class="icon-link">Volver</a>
+        </div>
+    </div>
 </asp:Content>

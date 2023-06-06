@@ -196,6 +196,21 @@ namespace CarritoWeb
             }
         }
 
+        //TODO: Link ir Detalle
+        protected void linkDetalle_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = int.Parse(((LinkButton)sender).CommandArgument);
+                Response.Redirect($"Detalle.aspx?id={id}", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
         // --------------------------------------------------------------------------------------------------------------------------------
         //public void cargarcarrito()
         //{

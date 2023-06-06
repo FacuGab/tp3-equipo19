@@ -35,7 +35,7 @@
                                             <asp:BoundField DataField="cantidad" HeaderText="Cantidad" />
                                             <asp:TemplateField HeaderText="Ir">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton Text="Detalle" runat="server" />
+                                                    <asp:LinkButton Text="Detalle" ID="linkDetalle" OnClick="linkDetalle_Click" CommandArgument='<%#Eval("Id") %>' CommandName="linkDetalle" runat="server" />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="+/-">

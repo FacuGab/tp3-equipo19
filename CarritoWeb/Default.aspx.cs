@@ -124,6 +124,12 @@ namespace CarritoWeb
 
             try
             {
+                //Verificamos que no sea un string no valido
+                if (string.IsNullOrEmpty(filtro))
+                    return;
+                if (filtro.All(s => !char.IsDigit(s)) == false)
+                    return;
+
                 //Si tiene datos aplica el filtro, sino muestra todos los artículos
                 if (filtro.Length > 2)
                 {

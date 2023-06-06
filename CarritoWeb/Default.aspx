@@ -6,8 +6,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" />
     <style>
-        #filaTituloContador{
-            padding-top:50px; /* Manu!, si ves esto y pensas que se puede hacer mejor de otra forma, mandale */
+        #filaTituloContador {
+            padding-top: 50px; /* Manu!, si ves esto y pensas que se puede hacer mejor de otra forma, mandale */
         }
     </style>
 
@@ -21,8 +21,7 @@
     </asp:UpdatePanel>
 
     <!--FILTROS LISTA PRINCIPAL -->
-    <section class="row">
-        <div class="col-lg-2"></div>
+    <section class="row justify-content-center" style="margin-left: 100px">
         <div class="col-lg-2">
             <div class="form-floating">
                 <asp:TextBox runat="server" ID="tbFiltroRapido" value="" CssClass="form-control  " placeholder="Filtro Rápido" AutoPostBack="true" OnTextChanged="tbFiltroRapido_TextChanged" />
@@ -57,9 +56,9 @@
     <!-- LISTA PRINCIPAL -->
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
+
             <section class="row mt-3" aria-labelledby="aspnetTitle">
                 <asp:Label ID="lblAgregado" runat="server" Text="Label"></asp:Label>
-
                 <!-- DATA LIST -->
                 <asp:DataList ID="DataList1" runat="server" DataKeyField="Id" RepeatColumns="3" OnItemCommand="DataList1_ItemCommand">
                     <ItemTemplate>
@@ -87,6 +86,7 @@
                     </ItemTemplate>
                 </asp:DataList>
             </section>
+
         </ContentTemplate>
     </asp:UpdatePanel>
 
