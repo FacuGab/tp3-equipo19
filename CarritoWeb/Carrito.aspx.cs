@@ -211,6 +211,87 @@ namespace CarritoWeb
             }
         }
 
+        //TODO: Boton '+', agregar item
+        protected void btnAgregar_Click(object sender, System.Web.UI.ImageClickEventArgs e)
+        {
+            try
+            {
+                //Cargamos variables y el id del item a quitar
+                itemList = (List<CarritoItem>)Session["carritoItem"];
+                var btn = (ImageButton)sender;
+                int idItem = int.Parse(btn.CommandArgument);
+
+                //Cargamos total items carrito y total $
+                int countCarrito = (int)Session["countCarrito"];
+                decimal totalParcial = (decimal)Session["totalCarrito"];
+
+                //Buscamos el item en lista CarritoItem y lo sumamos
+                //sumamos un item al carrito y recalculamos
+                CarritoItem item = itemList.Find(itm => itm.Id == idItem);
+                if (item != null)
+                {
+                    item.Cantidad++;
+                    countCarrito++;
+                    totalParcial += item.Precio;
+                }
+
+                //Re-asignamos nuevos valores
+                Session["countCarrito"] = countCarrito;
+                Session["totalCarrito"] = totalParcial;
+                total = totalParcial;
+                countItemCarrito = countCarrito;
+
+                //volvemos a cargar lista en el grid
+                mostrarListaCarritoItem(itemList);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        //TODO: Boton '-', restar item
+        protected void btnQuitar_Click(object sender, System.Web.UI.ImageClickEventArgs e)
+        {
+            try
+            {
+                //Cargamos variables y el id del item a quitar
+                itemList = (List<CarritoItem>)Session["carritoItem"];
+                var btn = (ImageButton)sender;
+                int idItem = int.Parse(btn.CommandArgument);
+
+                //asignamos total de items en carrito, total $ y el valor x/u.
+                int countCarrito = (int)Session["countCarrito"];
+                decimal totalParcial = (decimal)Session["totalCarrito"];
+
+                //Buscamos el item en lista CarritoItem y lo restamos
+                //restamos un item al carrito y recalculamos
+                CarritoItem item = itemList.Find(itm => itm.Id == idItem);
+                if (item != null && item.Cantidad > 0)
+                {
+                    decimal valorXunidad = item.Precio;
+                    item.Cantidad--;
+                    countCarrito --;
+                    totalParcial -= valorXunidad;
+                }
+
+                //Re-asignamos nuevos valores
+                Session["countCarrito"] = countCarrito;
+                Session["totalCarrito"] = totalParcial;
+                total = totalParcial;
+                countItemCarrito = countCarrito;
+
+                //volvemos a cargar lista en el grid
+                mostrarListaCarritoItem(itemList);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
         // --------------------------------------------------------------------------------------------------------------------------------
         //public void cargarcarrito()
         //{

@@ -63,7 +63,7 @@
                 <asp:DataList ID="DataList1" runat="server" DataKeyField="Id" RepeatColumns="3" OnItemCommand="DataList1_ItemCommand">
                     <ItemTemplate>
 
-                        <div class="card m-3 pt-2 bg-warning text-dark" style="width: 18rem;">
+                        <div class="card m-3 pt-2 bg-warning text-dark" style="width: 22rem;">
                             <div class="card-header text-center">
                                 <asp:Label ID="nomProdLabel" runat="server" Text='<%# Eval("nombre") %>' CssClass="fs-5" />
                                 <asp:Image ID="ImageCard" runat="server" ImageUrl='<%# Eval("urlImagen") %>'
@@ -80,7 +80,8 @@
                                     <asp:Label ID="precioProdLabel" runat="server" Text='<%# Eval("roundPrecio") %>' CssClass="card-text" />
                                 </p>
                             </div>
-                            <asp:Button Text="🛒 Agregar al carrito" ID="btnAgregar" CssClass="btn btn-outline-secondary mb-3 " CommandArgument='<%#Eval("id")%>' CommandName="Id_articulo" OnClick="btnAgregar_Click" runat="server" />
+                            <asp:Button Text="🛒 Agregar" ID="btnAgregar" CssClass="btn btn-secondary mb-3 fs-5" CommandArgument='<%#Eval("id")%>' CommandName="Id_articulo" OnClick="btnAgregar_Click" runat="server" />
+                            <asp:Label ID="lblAgregado" Text="" runat="server" CssClass="card-text" />
                         </div>
                         <!-- falta el otro boton comentado ¿? -->
                     </ItemTemplate>

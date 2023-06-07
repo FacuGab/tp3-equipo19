@@ -63,7 +63,6 @@ namespace CarritoWeb
 
                     //PRUEBA
                     CargarDetalle();
-                    lblAgregado.Text = "";
                 }
 
                 //SI ES Postback, apuntamos a lista principal de art en bd
@@ -176,6 +175,7 @@ namespace CarritoWeb
                     lsTemporal.AddRange(lsPrincipal.FindAll(itm => itm.id == idArticulo));
                 }
                 cargarListaPrincipal(listaArticulos);
+                lblAgregado.Text = "Articulo Agregado";
             }
             catch (Exception ex)
             {
