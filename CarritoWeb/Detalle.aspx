@@ -8,14 +8,14 @@
             padding-top: 100px;
         }
     </style>
-    <section class="row">
+    <section class="row justify-content-md-center">
 
-        <div class="col-3">
+        <div class="col col-md-2">
         </div>
-        <div class="col">
+        <div class="col-6">
             <div class="card mb-3" id="cardDetalle" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6" style="margin-left: 100px">
                         <%--<img src="<%:articulo.UrlImagen %>" onerror="this.src='./Recursos/image-not-found.png'" class="img-fluid rounded-start" alt="...">--%>
                         <div id="carouselExample" class="carousel slide">
                             <div class="carousel-inner">
@@ -55,15 +55,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-2"></div>
+        <div class="col col-md-2"></div>
 
     </section>
     <div class="row">
-        <div class="align-items-center">
+        <div class="col">
             <a href="Carrito.aspx" class="icon-link">Volver</a>
         </div>
     </div>
-
-
 
 </asp:Content>

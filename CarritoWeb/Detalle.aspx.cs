@@ -17,31 +17,64 @@ namespace CarritoWeb
         //Load
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(IsPostBack == false)
+            try
             {
-                //ClientScritManager es un obj para cargar un espacio para guardar scripts de la pagina a utilizar (?¿)
-                ClientScriptManager cs = Page.ClientScript;
-
-                if (Page.Request.Params["id"] != null)
+                if (IsPostBack == false)
                 {
-                    Id = int.Parse( Request.Params["id"]);
-                    articulo = ((List<Articulo>)Session["listaPrincipal"]).Find(art => art.id == Id);
-                    cargarImg(Id);
+                    //ClientScritManager es un obj para cargar un espacio para guardar scripts de la pagina a utilizar (?¿)
+                    ClientScriptManager cs = Page.ClientScript;
+
+                    if (Session["listaPrincipal"] == null)
+                    {
+                        cs.RegisterClientScriptBlock(this.GetType(), "AlertScript","alert('No hay lista de articulos cargada, vuelve a pagina principal')", true );
+                        return;
+                    }
+
+                    if (Page.Request.Params["id"] != null)
+                    {
+                        Id = int.Parse(Request.Params["id"]);
+                        if (Session["articuloDetalle"] == null)
+                        { 
+                            articulo = ((List<Articulo>)Session["listaPrincipal"]).Find(art => art.id == Id);
+                            Session.Add("articuloDetalle", articulo);
+                        }
+                        else
+                        {
+                            articulo = (Articulo)Session["articuloDetalle"];
+                        }
+
+                        cargarImg(Id);
+                        Session.Add("articuloImagenes", imagenes_x_articulo);
+
+                    }
+                    else
+                    {
+                        // Registrar un bloque de código JavaScript que muestra un mensaje de alerta
+                        cs.RegisterClientScriptBlock(this.GetType(), "AlertScript", "alert('ARTICULO NO CARGADO. Solo puedes ver detalle desde el carrito')", true);
+                        articulo = new Articulo()
+                        {
+                            nombre = "xxx",
+                            descripicion = "xxxx xxxxxx xxxxxx xxxxxx",
+                            categoria = new Categoria("xxxx"),
+                            marca = new Marca("xxxx"),
+                            precio = 0
+                        };
+                    }
                 }
                 else
                 {
-                    // Registrar un bloque de código JavaScript que muestra un mensaje de alerta
-                    cs.RegisterClientScriptBlock( this.GetType(), "AlertScript", "alert('ARTICULO NO CARGADO. Solo puedes ver detalle desde el carrito')", true);
-                    articulo = new Articulo()
-                    {
-                        nombre = "xxx",
-                        descripicion = "xxxx xxxxxx xxxxxx xxxxxx",
-                        categoria = new Categoria("xxxx"),
-                        marca = new Marca("xxxx"),
-                        precio = 0 
-                    };
+                    if (Session["articuloImagenes"] != null)
+                        imagenes_x_articulo = (List<string>)Session["articuloImagenes"];
+                    if (Session["articuloDetalle"] != null)
+                        articulo = (Articulo)Session["articuloDetalle"];
                 }
             }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
+            }
+
         }
 
         //Cargar Imagenes por articulo selecionado
@@ -49,7 +82,7 @@ namespace CarritoWeb
         {
             NegocioArticulo negocio = new NegocioArticulo();
 
-            imagenes_x_articulo = new List<string>( 
+            imagenes_x_articulo = new List<string>(
                 negocio.CargarImgXart(id)
                 );
         }
