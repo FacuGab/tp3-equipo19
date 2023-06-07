@@ -37,18 +37,18 @@
 <%--                                <li class="nav-item text-right">
                                     <a class="nav-link text-black" runat="server" href="~/ListaArticulos.aspx">Lista de Artículos</a>
                                 </li>--%>
-                                <li class="nav-item text-right">
+                                <%--<li class="nav-item text-right">
                                     <a class="nav-link text-black" runat="server" href="~/Detalle.aspx">Detalle</a>
-                                </li>
+                                </li>--%>
                                 <li class="nav-item">
                                     <a class="nav-link text-black" href="Carrito.aspx" OnClick="btnCargarCarrito_Click1">🛒 Carrito</a>
                                 </li>
                                 <li class="nav-item ml-5">
                                     <a href="#" Class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                                         <%--<img src="Recursos/Carrito.png" class="img-fluid" alt="icono-carrito" id="navBarIconCarrito" />--%>
-                                        <span type="button" class="btn btn-primary">
+                                        <%--<span type="button" class="btn btn-primary">
                                           # <span class="badge text-bg-secondary"><%: countItems %></span>
-                                        </span>
+                                        </span>--%>
                                     </a>
                                 </li>
                             </ul>

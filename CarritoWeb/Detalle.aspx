@@ -3,31 +3,25 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <style>
-        #cardDetalle {
-            padding-top: 100px;
-        }
-    </style>
-    <section class="row">
 
-        <div class="col-3">
-        </div>
-        <div class="col">
-            <div class="card mb-3" id="cardDetalle" style="max-width: 540px;">
+    <section class="row mt-5" >
+
+        <div class="col mt-5 mb-5" >
+            <div class="card mt-5" id="cardDetalle" > <%-- style="max-width: 540px;"--%>
                 <div class="row g-0">
                     <div class="col-md-6">
                         <%--<img src="<%:articulo.UrlImagen %>" onerror="this.src='./Recursos/image-not-found.png'" class="img-fluid rounded-start" alt="...">--%>
-                        <div id="carouselExample" class="carousel slide">
-                            <div class="carousel-inner">
+                        <div id="carouselExample" class="carousel slide w-100 h-auto">
+                            <div class="carousel-inner img-fluid" data-bs-interval="10000">
 
                                 <%
                                     if (imagenes_x_articulo == null) return;
                                     for(int i = 0; i < imagenes_x_articulo.Count;  i++)
                                     {
                                 %>
-                                <div class="carousel-item active">
-                                    <img src="<%:imagenes_x_articulo[i] %>" onerror="this.src='./Recursos/image-not-found.png'" class="d-block w-100" alt="...">
-                                </div>
+                                    <div class="carousel-item active w-100 h-80">
+                                        <img src="<%:imagenes_x_articulo[i] %>" class="d-block w-100" alt="..." id="img-carousel">
+                                    </div>
                                 <%
                                     } %>
                             </div>
@@ -41,28 +35,21 @@
                             </button>
                         </div>
                     </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Nombre: <%:articulo.nombre %></h5>
-                            <p class="card-text">Marca: <%:articulo.marca.marca %></p>
-                            <p class="card-text">Categoria: <%:articulo.categoria.categoria%></p>
-                            <p class="card-text">Descripcion: <%:articulo.descripicion %></p>
-                            <p class="card-text">Esto es mas informacion sobre el articulo</p>
+                    <div class="card col-md-6">
+                        <h5 class="card-header text-center "><%:articulo.nombre %></h5>
+                        <div class="card-body ">
+                            <h5 class="card-title fs-5 "><%:articulo.marca.marca %></h5>
+                            <p class="card-text"><%:articulo.categoria.categoria%></p>
+                            <p class="card-text"><%:articulo.descripicion%></p>
                             <p class="card-text">Precio: <%:articulo.precio %></p>
-                            <p class="card-text"><small class="text-body-secondary">Ultimas 3 unidades!</small></p>
+                            <a href="Carrito.aspx" class="btn btn-warning mt-4">Regresar</a>
+                            <p class="card-text mt-5"><small class="text-body-secondary">Ultimas 3 unidades!</small></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-2"></div>
-
     </section>
-    <div class="row">
-        <div class="align-items-center">
-            <a href="Carrito.aspx" class="icon-link">Volver</a>
-        </div>
-    </div>
 
 
 
