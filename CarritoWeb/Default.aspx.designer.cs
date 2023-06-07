@@ -69,15 +69,6 @@ namespace CarritoWeb
         protected global::System.Web.UI.WebControls.Button btnEliminarFiltro1;
 
         /// <summary>
-        /// lblAgregado control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAgregado;
-
-        /// <summary>
         /// DataList1 control.
         /// </summary>
         /// <remarks>

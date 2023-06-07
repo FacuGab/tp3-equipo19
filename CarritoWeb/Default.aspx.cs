@@ -16,19 +16,13 @@ namespace CarritoWeb
     public partial class Default : Page
     {
         private NegocioArticulo negocio;
-        private Articulo articulo;
-        private List<CarritoItem> itemList;
-        private List<CarritoItem> itmAux;
         public Dictionary<int, int> cantidadXitem;
-        private CarritoItem carritoItem;
+        DataTable dtb;
+
         public int countArticulos { get; set; } = 0;
         public int countItemCarrito { get; set; } = 0;
         public List<Articulo> listaArticulos { get; set; }
         public List<Articulo> lsCarrito { get; set; }
-
-        //metodo de prueba
-        DataTable dtb;
-        DataTable carrito = new DataTable();
 
         //TODO: LOAD
         protected void Page_Load(object sender, EventArgs e)
@@ -86,12 +80,12 @@ namespace CarritoWeb
             {
                 foreach (var articulo in listaArticulos)
                 {
-                    if (ddlFiltroCategoria.Text == "Solo categoria")
+                    if (ddlCriterio.Text == "Solo categoria")
                     {
                         // valida que el contenido del combo categoria sea igual o similar
                         listaFiltrada.AddRange(listaArticulos.FindAll(x => x.categoria.categoria.Contains(ddlFiltroCategoria.Text)));
                     }
-                    else if (ddlFiltroMarca.Text == "Solo marca")
+                    else if (ddlCriterio.Text == "Solo marca")
                     {
                         // valida que el contenido del combo marca sea igual o similar
                         listaFiltrada.AddRange(listaArticulos.FindAll(x => x.marca.marca.Contains(ddlFiltroMarca.Text)));
@@ -175,7 +169,7 @@ namespace CarritoWeb
                     lsTemporal.AddRange(lsPrincipal.FindAll(itm => itm.id == idArticulo));
                 }
                 cargarListaPrincipal(listaArticulos);
-                lblAgregado.Text = "Articulo Agregado";
+                //lblAgregado.Text = "Articulo Agregado";
             }
             catch (Exception ex)
             {
@@ -217,9 +211,7 @@ namespace CarritoWeb
             DataList1.DataBind();
         }
 
-
-
-        ///TODO: Metodos de prueba
+        ///TODO: DATA TABLE (tiene codigo sin uso, ver)
         protected void DataList1_ItemCommand(object source, DataListCommandEventArgs e)
         {
             string nom, url, marca, descrip;
@@ -233,11 +225,8 @@ namespace CarritoWeb
                 marca = ((Label)this.DataList1.SelectedItem.FindControl("marcaProdLabel")).Text;
                 descrip = ((Label)this.DataList1.SelectedItem.FindControl("descripProdLabel")).Text;
                 precio = Convert.ToDecimal(((Label)this.DataList1.SelectedItem.FindControl("precioProdLabel")).Text);
-
-                AgregarItem(nom, url, marca, descrip, precio);
-
-                lblAgregado.Text = "Producto Agregado: " + nom + " " + descrip;
-
+                //AgregarItem(nom, url, marca, descrip, precio);
+                //lblAgregado.Text = "Producto Agregado: " + nom + " " + descrip;
             }
         }
         public void CargarDetalle()
@@ -251,24 +240,24 @@ namespace CarritoWeb
 
             Session["pedido"] = dtb;
         }
-        public void AgregarItem(string nom, string url, string marca, string descip, decimal precio)
-        {
-            decimal total;
-            int cantidad = 1;
-            total = precio * cantidad;
-            carrito = (DataTable)Session["pedido"];
-            DataRow fila = carrito.NewRow();
-            fila[0] = nom;
-            fila[1] = url;
-            fila[2] = marca;
-            fila[3] = descip;
-            fila[4] = total;
-            carrito.Rows.Add(fila);
-            Session["pedido"] = carrito;
-        }
+        //public void AgregarItem(string nom, string url, string marca, string descip, decimal precio)
+        //{
+        //    decimal total;
+        //    int cantidad = 1;
+        //    total = precio * cantidad;
+        //    carrito = (DataTable)Session["pedido"];
+        //    DataRow fila = carrito.NewRow();
+        //    fila[0] = nom;
+        //    fila[1] = url;
+        //    fila[2] = marca;
+        //    fila[3] = descip;
+        //    fila[4] = total;
+        //    carrito.Rows.Add(fila);
+        //    Session["pedido"] = carrito; // esto esta mal mepa, estas referenciando una referencia ¿?
+        //}
         protected void Button1_Click(object sender, EventArgs e)
         {
-
+            //trash, sacar
         }
     }//fin
 }

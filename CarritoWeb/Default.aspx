@@ -58,7 +58,6 @@
         <ContentTemplate>
 
             <section class="row mt-3" aria-labelledby="aspnetTitle">
-                <asp:Label ID="lblAgregado" runat="server" Text="Label"></asp:Label>
                 <!-- DATA LIST -->
                 <asp:DataList ID="DataList1" runat="server" DataKeyField="Id" RepeatColumns="3" OnItemCommand="DataList1_ItemCommand">
                     <ItemTemplate>
@@ -83,7 +82,7 @@
                             <asp:Button Text="🛒 Agregar" ID="btnAgregar" CssClass="btn btn-secondary mb-3 fs-5" CommandArgument='<%#Eval("id")%>' CommandName="Id_articulo" OnClick="btnAgregar_Click" runat="server" />
                             <asp:Label ID="lblAgregado" Text="" runat="server" CssClass="card-text" />
                         </div>
-                        <!-- falta el otro boton comentado ¿? -->
+
                     </ItemTemplate>
                 </asp:DataList>
             </section>

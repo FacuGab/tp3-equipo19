@@ -16,7 +16,6 @@ namespace Negocio
     {
         //TODO: VARIABLES NEGOCIO:
         private SqlDataReader lector = null;
-        private SqlDataAdapter lectorImgs = null;
         private Database datos;
         public List<Articulo> articulos;
         public List<Categoria> categorias;

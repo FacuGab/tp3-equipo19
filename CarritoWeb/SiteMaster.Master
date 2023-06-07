@@ -32,24 +32,11 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav ms-auto d-flex">
                                 <li class="nav-item">
-                                    <a class="nav-link active text-black " aria-current="page" runat="server" href="~/">Catalogo</a>
-                                </li>
-<%--                                <li class="nav-item text-right">
-                                    <a class="nav-link text-black" runat="server" href="~/ListaArticulos.aspx">Lista de Artículos</a>
-                                </li>--%>
-                                <%--<li class="nav-item text-right">
-                                    <a class="nav-link text-black" runat="server" href="~/Detalle.aspx">Detalle</a>
-                                </li>--%>
-                                <li class="nav-item">
-                                    <a class="nav-link text-black" href="Carrito.aspx" OnClick="btnCargarCarrito_Click1">🛒 Carrito</a>
-                                </li>
-                                <li class="nav-item ml-5">
-                                    <a href="#" Class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                                        <%--<img src="Recursos/Carrito.png" class="img-fluid" alt="icono-carrito" id="navBarIconCarrito" />--%>
-                                        <%--<span type="button" class="btn btn-primary">
-                                          # <span class="badge text-bg-secondary"><%: countItems %></span>
-                                        </span>--%>
+                                    <a class="nav-link text-black" href="Carrito.aspx" OnClick="btnCargarCarrito_Click1">🛒 Carrito
                                     </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active text-black " aria-current="page" runat="server" href="~/">Catalogo</a>
                                 </li>
                             </ul>
                         </div>
